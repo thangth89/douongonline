@@ -709,28 +709,44 @@
         function submitOrder() {
             let customerName = document.getElementById("customer-name").value;
             let customerPhone = document.getElementById("customer-phone").value;
-            
-            // Validate form
+
             if (!customerName || !customerPhone) {
                 alert("Vui lòng điền đầy đủ thông tin!");
                 return;
             }
-            
-            // Show success message
-            document.querySelector(".checkout-form").style.display = "none";
-            document.querySelector(".success-message").style.display = "block";
-            
-            // Clear cart
-            cart = [];
-            updateCartUI();
+
+            const order = {
+                customerName,
+                customerPhone,
+                cart,
+                totalAmount
+            };
+
+            fetch("https://script.google.com/macros/s/AKfycbxNLPefTkG_dgD9BgG1UQA5ANXa1Q75IDHIby-ZccfcHXbQuE39RcJfOacqHu-AEofvEw/exec", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(order)
+            })
+            .then(response => response.text())
+            .then(result => {
+                console.log("Đặt hàng thành công:", result);
+                document.querySelector(".checkout-form").style.display = "none";
+                document.querySelector(".success-message").style.display = "block";
+                cart = [];
+                updateCartUI();
+            })
+            .catch(error => {
+                console.error("Lỗi khi gửi đơn hàng:", error);
+                alert("Có lỗi khi gửi đơn hàng. Vui lòng thử lại.");
+            });
         }
-        
-        // Continue shopping
+
         function continueShopping() {
             closeCart();
         }
-        
-        // Initialize page when loaded
+
         window.onload = initializePage;
     </script>
 </body>
