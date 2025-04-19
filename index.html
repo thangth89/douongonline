@@ -533,32 +533,6 @@
     }
 }
 
-
-.submit-order.loading {
-    position: relative;
-    pointer-events: none;
-    color: transparent;
-}
-
-.submit-order.loading::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 20px;
-    height: 20px;
-    margin: -10px 0 0 -10px;
-    border: 2px solid white;
-    border-top: 2px solid transparent;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
 </style>
 </head>
 <body>
@@ -918,41 +892,56 @@
         }
         
         // Submit order
-        function submitOrder() {
-            let customerName = document.getElementById("customer-name").value;
-            let customerPhone = document.getElementById("customer-phone").value;
+        let isSubmitting = false;
 
-            if (!customerName || !customerPhone) {
-                alert("Vui lòng điền đầy đủ thông tin!");
-                return;
-            }
+function submitOrder() {
+    if (isSubmitting) return;
 
-            const payload = {
-                customerName,
-                customerPhone,
-                cart
-            };
+    let customerName = document.getElementById("customer-name").value;
+    let customerPhone = document.getElementById("customer-phone").value;
 
-            fetch("https://script.google.com/macros/s/AKfycbxl0-V9DSU8XsLz8g2TWmf5D8_4is-AT_rf7wZbORHR3Wq5TYuVAkr21y7xt3GhJ0TIkw/exec", { // 🔁 Dán URL của Apps Script Web App
-                method: "POST",
-                mode: "no-cors", // Bỏ qua CORS
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(payload)
-            })
-            .then(() => {
-                document.querySelector(".checkout-form").style.display = "none";
-                document.querySelector(".success-message").style.display = "block";
+    if (!customerName || !customerPhone) {
+        alert("Vui lòng điền đầy đủ thông tin!");
+        return;
+    }
 
-                cart = [];
-                updateCartUI();
-            })
-            .catch(err => {
-                alert("Có lỗi xảy ra khi gửi đơn hàng.");
-                console.error(err);
-            });
-        }
+    const submitButton = document.querySelector(".submit-order");
+    submitButton.disabled = true;
+    submitButton.textContent = "Đang gửi...";
+    isSubmitting = true;
+
+    const payload = {
+        customerName,
+        customerPhone,
+        cart
+    };
+
+    fetch("https://script.google.com/macros/s/AKfycbxl0-V9DSU8XsLz8g2TWmf5D8_4is-AT_rf7wZbORHR3Wq5TYuVAkr21y7xt3GhJ0TIkw/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+    })
+    .then(() => {
+        document.querySelector(".checkout-form").style.display = "none";
+        document.querySelector(".success-message").style.display = "block";
+
+        cart = [];
+        updateCartUI();
+    })
+    .catch(err => {
+        alert("Có lỗi xảy ra khi gửi đơn hàng.");
+        console.error(err);
+    })
+    .finally(() => {
+        // Cho dù thành công hay lỗi, cũng reset lại nút
+        submitButton.disabled = false;
+        submitButton.textContent = "Xác nhận đặt hàng";
+        isSubmitting = false;
+    });
+}
         
         // Continue shopping
         function continueShopping() {
