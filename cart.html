@@ -1,0 +1,30 @@
+<div class="cart-modal">
+<div class="cart-content">
+<div class="cart-header">
+<h2>Giỏ hàng của bạn</h2>
+<button class="close-cart" onclick="closeCart()">×</button>
+</div>
+<div class="cart-items">
+<!-- Cart items will be inserted here -->
+</div>
+<div class="cart-total">Tổng tiền: 0 VNĐ</div>
+<button class="checkout-btn" onclick="showCheckoutForm()">Đặt hàng</button>
+<div class="checkout-form">
+<h3>Thông tin đặt hàng</h3>
+<div class="form-group">
+<label for="customer-name">Họ và tên:</label>
+<input id="customer-name" required="" type="text"/>
+</div>
+<div class="form-group">
+<label for="customer-phone">Số điện thoại:</label>
+<input id="customer-phone" required="" type="tel"/>
+</div>
+<button class="submit-order" onclick="submitOrder()">Xác nhận đặt hàng</button>
+</div>
+<div class="success-message">
+<h2>Đặt hàng thành công!</h2>
+<p>Cảm ơn bạn đã đặt hàng. Chúng tôi sẽ liên hệ với bạn sớm nhất.</p>
+<button class="continue-shopping" onclick="continueShopping()">Tiếp tục mua sắm</button>
+</div>
+</div>
+</div>
