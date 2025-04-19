@@ -160,10 +160,7 @@
             cursor: pointer;
             border-radius: 20px;
             transition: all 0.3s ease;
-        
-touch-action: manipulation;
--webkit-tap-highlight-color: transparent;
-}
+        }
         
         .option-btn.selected {
             background-color: #8B4513;
@@ -696,7 +693,7 @@ touch-action: manipulation;
             // Add event listeners to option buttons
             let optionButtons = document.querySelectorAll(".option-btn");
             optionButtons.forEach(button => {
-                button.addEventListener("pointerdown", function() {
+                button.addEventListener("click", function() {
                     // Remove selected class from siblings
                     let siblings = this.parentElement.querySelectorAll(".option-btn");
                     siblings.forEach(sib => sib.classList.remove("selected"));
@@ -709,7 +706,7 @@ touch-action: manipulation;
             // Add event listeners to add-to-cart buttons
             let addToCartButtons = document.querySelectorAll(".add-to-cart");
             addToCartButtons.forEach(button => {
-                button.addEventListener("pointerdown", function() {
+                button.addEventListener("click", function() {
                     // Get product info
                     let productName = this.getAttribute("data-name");
                     let basePrice = parseInt(this.getAttribute("data-base-price"));
@@ -895,56 +892,41 @@ touch-action: manipulation;
         }
         
         // Submit order
-        let isSubmitting = false;
+        function submitOrder() {
+            let customerName = document.getElementById("customer-name").value;
+            let customerPhone = document.getElementById("customer-phone").value;
 
-function submitOrder() {
-    if (isSubmitting) return;
+            if (!customerName || !customerPhone) {
+                alert("Vui lòng điền đầy đủ thông tin!");
+                return;
+            }
 
-    let customerName = document.getElementById("customer-name").value;
-    let customerPhone = document.getElementById("customer-phone").value;
+            const payload = {
+                customerName,
+                customerPhone,
+                cart
+            };
 
-    if (!customerName || !customerPhone) {
-        alert("Vui lòng điền đầy đủ thông tin!");
-        return;
-    }
+            fetch("https://script.google.com/macros/s/AKfycbxl0-V9DSU8XsLz8g2TWmf5D8_4is-AT_rf7wZbORHR3Wq5TYuVAkr21y7xt3GhJ0TIkw/exec", { // 🔁 Dán URL của Apps Script Web App
+                method: "POST",
+                mode: "no-cors", // Bỏ qua CORS
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(() => {
+                document.querySelector(".checkout-form").style.display = "none";
+                document.querySelector(".success-message").style.display = "block";
 
-    const submitButton = document.querySelector(".submit-order");
-    submitButton.disabled = true;
-    submitButton.textContent = "Đang gửi...";
-    isSubmitting = true;
-
-    const payload = {
-        customerName,
-        customerPhone,
-        cart
-    };
-
-    fetch("https://script.google.com/macros/s/AKfycbxl0-V9DSU8XsLz8g2TWmf5D8_4is-AT_rf7wZbORHR3Wq5TYuVAkr21y7xt3GhJ0TIkw/exec", {
-        method: "POST",
-        mode: "no-cors",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(payload)
-    })
-    .then(() => {
-        document.querySelector(".checkout-form").style.display = "none";
-        document.querySelector(".success-message").style.display = "block";
-
-        cart = [];
-        updateCartUI();
-    })
-    .catch(err => {
-        alert("Có lỗi xảy ra khi gửi đơn hàng.");
-        console.error(err);
-    })
-    .finally(() => {
-        // Cho dù thành công hay lỗi, cũng reset lại nút
-        submitButton.disabled = false;
-        submitButton.textContent = "Xác nhận đặt hàng";
-        isSubmitting = false;
-    });
-}
+                cart = [];
+                updateCartUI();
+            })
+            .catch(err => {
+                alert("Có lỗi xảy ra khi gửi đơn hàng.");
+                console.error(err);
+            });
+        }
         
         // Continue shopping
         function continueShopping() {
