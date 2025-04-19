@@ -25,41 +25,49 @@
         
         header {
             background-color: #8B4513;
-            padding: 20px 0;
+            padding: 15px 0;
             color: white;
-            text-align: center;
-            margin-bottom: 30px;
-            margin-bottom: 0; /* bỏ margin để dính sát tabs */
             position: sticky;
             top: 0;
             z-index: 101;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
         }
         
         header h1 {
             font-size: 32px;
         }
         
-        .tabs {
-            position: sticky;
-            top: 80px; /* nếu header cao ~80px */
-            z-index: 100;
-            background-color: white;
-        }
+        .main-menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
         
-        .tab {
-            padding: 10px 20px;
-            cursor: pointer;
-            background-color: #e0e0e0;
+        .menu-item {
+            padding: 8px 16px;
+            background-color: rgba(255, 255, 255, 0.2);
             border: none;
-            outline: none;
-            font-size: 16px;
+            border-radius: 4px;
+            color: white;
+            cursor: pointer;
             font-weight: bold;
             transition: all 0.3s ease;
         }
         
-        .tab.active {
-            background-color: #8B4513;
-            color: white;
+        .menu-item:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .menu-item.active {
+            background-color: white;
+            color: #8B4513;
         }
         
         .tab-content {
@@ -376,25 +384,97 @@
                 width: 95%;
                 max-width: none;
             }
+            
+            .header-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .main-menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
         }
             .product-grid {
                 display: grid;
                 grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
                 gap: 20px;
         }
-    </style>
+    
+.toast {
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1100;
+}
+.toast.show {
+    opacity: 1;
+}
+
+
+@media screen and (max-width: 768px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .product img {
+        width: 160px;
+        height: 160px;
+    }
+    .add-to-cart {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+    .header-container h1 {
+        font-size: 24px;
+        text-align: center;
+        width: 100%;
+    }
+    .main-menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+    .cart-content {
+        padding: 10px;
+    }
+}
+
+
+@media screen and (max-width: 768px) {
+    input, select, textarea {
+        font-size: 16px;
+    }
+}
+
+</style>
 </head>
 <body>
     <header>
-        <h1>Đặt Đồ Uống Online</h1>
+        <div class="container header-container">
+            <h1>Đặt Đồ Uống Online</h1>
+            <nav class="main-menu">
+                <button class="menu-item active" onclick="openTab(event, 'coffee')">Cà Phê</button>
+                <button class="menu-item" onclick="openTab(event, 'milktea')">Trà Sữa</button>
+            </nav>
+        </div>
     </header>
     
     <div class="container">
-        <div class="tabs">
-            <button class="tab active" onclick="openTab(event, 'coffee')">Cà Phê</button>
-            <button class="tab" onclick="openTab(event, 'milktea')">Trà Sữa</button>
-        </div>
-        
         <div id="coffee" class="tab-content active">
             <div class="product-grid">
                 <div class="product">
@@ -433,46 +513,6 @@
                             data-name="Bạc Sỉu" 
                             data-base-price="28000" 
                             data-image="images/bacsiu.jpg"
-                            data-product-type="coffee">Thêm vào giỏ hàng</button>
-                </div>
-        
-                <!-- Nâu đá -->
-                <div class="product">
-                    <img src="images/nauda.jpg" alt="Nâu đá">
-                    <h3>Nâu Đá</h3>
-                    <div class="price">27.000 VNĐ</div>
-                    <div class="options">
-                        <div class="option-title">Chọn Size:</div>
-                        <div class="option-buttons size-options">
-                            <button class="option-btn selected" data-value="S" data-price="0">S</button>
-                            <button class="option-btn" data-value="M" data-price="5000">M (+5.000đ)</button>
-                            <button class="option-btn" data-value="L" data-price="10000">L (+10.000đ)</button>
-                        </div>
-                    </div>
-                    <button class="add-to-cart" 
-                            data-name="Nâu Đá" 
-                            data-base-price="27000" 
-                            data-image="images/nauda.jpg"
-                            data-product-type="coffee">Thêm vào giỏ hàng</button>
-                </div>
-        
-                <!-- Cà phê muối -->
-                <div class="product">
-                    <img src="images/caphemuoi.jpg" alt="Cà phê muối">
-                    <h3>Cà Phê Muối</h3>
-                    <div class="price">32.000 VNĐ</div>
-                    <div class="options">
-                        <div class="option-title">Chọn Size:</div>
-                        <div class="option-buttons size-options">
-                            <button class="option-btn selected" data-value="S" data-price="0">S</button>
-                            <button class="option-btn" data-value="M" data-price="5000">M (+5.000đ)</button>
-                            <button class="option-btn" data-value="L" data-price="10000">L (+10.000đ)</button>
-                        </div>
-                    </div>
-                    <button class="add-to-cart" 
-                            data-name="Cà Phê Muối" 
-                            data-base-price="32000" 
-                            data-image="images/caphemuoi.jpg"
                             data-product-type="coffee">Thêm vào giỏ hàng</button>
                 </div>
             </div>
@@ -565,10 +605,10 @@
                 tabContents[i].classList.remove("active");
             }
             
-            // Remove active class from tabs
-            let tabs = document.getElementsByClassName("tab");
-            for (let i = 0; i < tabs.length; i++) {
-                tabs[i].classList.remove("active");
+            // Remove active class from menu items
+            let menuItems = document.getElementsByClassName("menu-item");
+            for (let i = 0; i < menuItems.length; i++) {
+                menuItems[i].classList.remove("active");
             }
             
             // Show the current tab and add active class
@@ -632,7 +672,7 @@
                     addToCart(item);
                     
                     // Show success message
-                    alert(productName + " đã được thêm vào giỏ hàng!");
+                    showToast(productName + " đã được thêm vào giỏ hàng!");
                 });
             });
             
@@ -780,24 +820,33 @@
         }
         
         // Submit order
-        function submitOrder() {
-    let customerName = document.getElementById("customer-name").value;
-    let customerPhone = document.getElementById("customer-phone").value;
+        let isSubmitting = false;
 
-    if (!customerName || !customerPhone) {
+        function submitOrder() {
+        if (isSubmitting) return;
+
+        let customerName = document.getElementById("customer-name").value;
+        let customerPhone = document.getElementById("customer-phone").value;
+
+        if (!customerName || !customerPhone) {
         alert("Vui lòng điền đầy đủ thông tin!");
         return;
-    }
+         }
 
-    const payload = {
+        const submitButton = document.querySelector(".submit-order");
+        submitButton.disabled = true;
+        submitButton.textContent = "Đang gửi...";
+        isSubmitting = true;
+
+        const payload = {
         customerName,
         customerPhone,
         cart
-    };
+        };
 
-    fetch("https://script.google.com/macros/s/AKfycbxl0-V9DSU8XsLz8g2TWmf5D8_4is-AT_rf7wZbORHR3Wq5TYuVAkr21y7xt3GhJ0TIkw/exec", { // 🔁 Dán URL của Apps Script Web App
+    fetch("https://script.google.com/macros/s/AKfycbxl0-V9DSU8XsLz8g2TWmf5D8_4is-AT_rf7wZbORHR3Wq5TYuVAkr21y7xt3GhJ0TIkw/exec", {
         method: "POST",
-        mode: "no-cors", // Bỏ qua CORS
+        mode: "no-cors",
         headers: {
             "Content-Type": "application/json"
         },
@@ -813,6 +862,12 @@
     .catch(err => {
         alert("Có lỗi xảy ra khi gửi đơn hàng.");
         console.error(err);
+    })
+    .finally(() => {
+        // Cho dù thành công hay lỗi, cũng reset lại nút
+        submitButton.disabled = false;
+        submitButton.textContent = "Xác nhận đặt hàng";
+        isSubmitting = false;
     });
 }
 
@@ -822,9 +877,31 @@
             closeCart();
         }
         
+        
+    function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.classList.add("show");
+
+    const sound = document.getElementById("addSound");
+    sound.currentTime = 0;
+    sound.play().catch(err => {
+        console.warn("Không thể phát âm thanh:", err);
+    });
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 2000);
+}
+
         // Initialize page when loaded
         window.onload = initializePage;
     </script>
-</body>
+<div id="toast" class="toast">Đã thêm vào giỏ hàng</div>
 
+<audio id="addSound" preload="auto">
+    <source src="ting.mp3" type="audio/mpeg">
+</audio>
+
+</body>
 </html>
