@@ -29,6 +29,10 @@
             color: white;
             text-align: center;
             margin-bottom: 30px;
+            margin-bottom: 0; /* bỏ margin để dính sát tabs */
+            position: sticky;
+            top: 0;
+            z-index: 101;
         }
         
         header h1 {
@@ -36,9 +40,10 @@
         }
         
         .tabs {
-            display: flex;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #8B4513;
+            position: sticky;
+            top: 80px; /* nếu header cao ~80px */
+            z-index: 100;
+            background-color: white;
         }
         
         .tab {
