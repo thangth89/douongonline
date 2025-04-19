@@ -100,6 +100,7 @@
             width: 100%;
             max-width: 400px;
             margin-bottom: 15px;
+            text-align: center;
         }
         
         .option-title {
@@ -109,6 +110,7 @@
         
         .option-buttons {
             display: flex;
+            justify-content: center; /* căn giữa các nút */
             gap: 10px;
             flex-wrap: wrap;
         }
@@ -353,7 +355,6 @@
             color: #4CAF50;
             margin-bottom: 20px;
         }
-        
         .continue-shopping {
             padding: 10px 20px;
             background-color: #8B4513;
@@ -371,6 +372,11 @@
                 max-width: none;
             }
         }
+            .product-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+        }
     </style>
 </head>
 <body>
@@ -385,25 +391,88 @@
         </div>
         
         <div id="coffee" class="tab-content active">
-            <div class="product">
-                <img src="images/caphe1.jpg" alt="Cà phê đen đá">
-                <h3>Cà Phê Đen Đá</h3>
-                <div class="price">25.000 VNĐ</div>
-                <div class="options">
-                    <div class="option-title">Chọn Size:</div>
-                    <div class="option-buttons size-options">
-                        <button class="option-btn selected" data-value="S" data-price="0">S</button>
-                        <button class="option-btn" data-value="M" data-price="5000">M (+5.000đ)</button>
-                        <button class="option-btn" data-value="L" data-price="10000">L (+10.000đ)</button>
+            <div class="product-grid">
+                <div class="product">
+                    <img src="images/caphe1.jpg" alt="Cà phê đen đá">
+                    <h3>Cà Phê Đen Đá</h3>
+                    <div class="price">25.000 VNĐ</div>
+                    <div class="options">
+                        <div class="option-title">Chọn Size:</div>
+                        <div class="option-buttons size-options">
+                            <button class="option-btn selected" data-value="S" data-price="0">S</button>
+                            <button class="option-btn" data-value="M" data-price="5000">M (+5.000đ)</button>
+                            <button class="option-btn" data-value="L" data-price="10000">L (+10.000đ)</button>
+                        </div>
                     </div>
+                    <button class="add-to-cart" 
+                            data-name="Cà Phê Đen Đá" 
+                            data-base-price="25000" 
+                            data-image="images/caphe1.jpg"
+                            data-product-type="coffee">Thêm vào giỏ hàng</button>
                 </div>
-                <button class="add-to-cart" 
-                        data-name="Cà Phê Đen Đá" 
-                        data-base-price="25000" 
-                        data-image="/api/placeholder/400/320"
-                        data-product-type="coffee">Thêm vào giỏ hàng</button>
+        
+                <!-- Bạc sỉu -->
+                <div class="product">
+                    <img src="images/bacsiu.jpg" alt="Bạc sỉu">
+                    <h3>Bạc Sỉu</h3>
+                    <div class="price">28.000 VNĐ</div>
+                    <div class="options">
+                        <div class="option-title">Chọn Size:</div>
+                        <div class="option-buttons size-options">
+                            <button class="option-btn selected" data-value="S" data-price="0">S</button>
+                            <button class="option-btn" data-value="M" data-price="5000">M (+5.000đ)</button>
+                            <button class="option-btn" data-value="L" data-price="10000">L (+10.000đ)</button>
+                        </div>
+                    </div>
+                    <button class="add-to-cart" 
+                            data-name="Bạc Sỉu" 
+                            data-base-price="28000" 
+                            data-image="images/bacsiu.jpg"
+                            data-product-type="coffee">Thêm vào giỏ hàng</button>
+                </div>
+        
+                <!-- Nâu đá -->
+                <div class="product">
+                    <img src="images/nauda.jpg" alt="Nâu đá">
+                    <h3>Nâu Đá</h3>
+                    <div class="price">27.000 VNĐ</div>
+                    <div class="options">
+                        <div class="option-title">Chọn Size:</div>
+                        <div class="option-buttons size-options">
+                            <button class="option-btn selected" data-value="S" data-price="0">S</button>
+                            <button class="option-btn" data-value="M" data-price="5000">M (+5.000đ)</button>
+                            <button class="option-btn" data-value="L" data-price="10000">L (+10.000đ)</button>
+                        </div>
+                    </div>
+                    <button class="add-to-cart" 
+                            data-name="Nâu Đá" 
+                            data-base-price="27000" 
+                            data-image="images/nauda.jpg"
+                            data-product-type="coffee">Thêm vào giỏ hàng</button>
+                </div>
+        
+                <!-- Cà phê muối -->
+                <div class="product">
+                    <img src="images/caphemuoi.jpg" alt="Cà phê muối">
+                    <h3>Cà Phê Muối</h3>
+                    <div class="price">32.000 VNĐ</div>
+                    <div class="options">
+                        <div class="option-title">Chọn Size:</div>
+                        <div class="option-buttons size-options">
+                            <button class="option-btn selected" data-value="S" data-price="0">S</button>
+                            <button class="option-btn" data-value="M" data-price="5000">M (+5.000đ)</button>
+                            <button class="option-btn" data-value="L" data-price="10000">L (+10.000đ)</button>
+                        </div>
+                    </div>
+                    <button class="add-to-cart" 
+                            data-name="Cà Phê Muối" 
+                            data-base-price="32000" 
+                            data-image="images/caphemuoi.jpg"
+                            data-product-type="coffee">Thêm vào giỏ hàng</button>
+                </div>
             </div>
         </div>
+        
         
         <div id="milktea" class="tab-content">
             <div class="product">
@@ -752,4 +821,5 @@
         window.onload = initializePage;
     </script>
 </body>
+
 </html>
