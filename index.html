@@ -513,6 +513,52 @@
     max-width: 120px;
     text-align: center;
 }
+
+/* Giao diện option gọn gàng hơn và không bị chèn */
+.option-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.option-btn {
+    padding: 6px 12px;
+    font-size: 14px;
+    border: 1px solid #8B4513;
+    background-color: white;
+    color: #8B4513;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 60px;
+    max-width: 100px;
+    white-space: nowrap;
+    text-align: center;
+    flex: none;
+}
+
+.option-btn.selected {
+    background-color: #8B4513;
+    color: white;
+}
+
+/* Responsive: vừa gọn vừa dễ nhấn */
+@media screen and (max-width: 480px) {
+    .option-btn {
+        font-size: 13px;
+        padding: 6px 10px;
+        min-width: 50px;
+        max-width: 90px;
+    }
+
+    .add-to-cart,
+    .checkout-btn,
+    .submit-order {
+        font-size: 15px;
+        padding: 12px;
+    }
+}
 </style>
 </head>
 <body>
