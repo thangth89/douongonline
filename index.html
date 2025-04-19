@@ -158,43 +158,62 @@
             background-color: #6d3710;
         }
         
-        .cart-icon {
-            position: fixed;
-            right: 30px;
-            bottom: 30px;
-            width: 60px;
-            height: 60px;
-            background-color: #8B4513;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            color: white;
-            font-size: 24px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-            z-index: 1000;
-        }
         
-        .cart-icon:hover {
-            transform: scale(1.1);
-        }
-        
-        .cart-count {
-            position: absolute;
-            top: 0;
-            right: 0;
-            background-color: red;
-            color: white;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 12px;
-        }
+.cart-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: #8B4513;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: white;
+    font-size: 26px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    z-index: 1000;
+    transition: transform 0.2s ease, bottom 0.3s ease;
+}
+
+.cart-icon:hover {
+    transform: scale(1.1);
+}
+
+.cart-count {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: red;
+    color: white;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Mobile tối ưu hơn */
+@media screen and (max-width: 480px) {
+    .cart-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+        bottom: 15px;
+        right: 15px;
+    }
+
+    .cart-count {
+        width: 18px;
+        height: 18px;
+        font-size: 11px;
+    }
+}
+
         
         .cart-modal {
             display: none;
@@ -559,7 +578,19 @@
         padding: 12px;
     }
 }
+
+@keyframes shake {
+    0% { transform: translate(0); }
+    25% { transform: translate(-2px, 2px); }
+    50% { transform: translate(2px, -2px); }
+    75% { transform: translate(-2px, -2px); }
+    100% { transform: translate(0); }
+}
+.cart-icon.shake {
+    animation: shake 0.3s;
+}
 </style>
+
 </head>
 <body>
     <header>
