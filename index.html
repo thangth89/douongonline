@@ -397,7 +397,7 @@
                         <button class="option-btn" data-value="L" data-price="10000">L (+10.000đ)</button>
                     </div>
                 </div>
-                <button class="add-to-cart" 
+                <button type="button" class="add-to-cart"
                         data-name="Cà Phê Đen Đá" 
                         data-base-price="25000" 
                         data-image="/api/placeholder/400/320"
@@ -427,7 +427,7 @@
                         <button class="option-btn" data-value="100%">100%</button>
                     </div>
                 </div>
-                <button class="add-to-cart" 
+                <button type="button" class="add-to-cart"
                         data-name="Trà Sữa Truyền Thống" 
                         data-base-price="30000" 
                         data-image="/api/placeholder/400/320"
@@ -454,7 +454,7 @@
             
             <div class="cart-total">Tổng tiền: 0 VNĐ</div>
             
-            <button class="checkout-btn" onclick="showCheckoutForm()">Đặt hàng</button>
+            <button type="button" class="checkout-btn" onclick="showCheckoutForm()">Đặt hàng</button>
             
             <div class="checkout-form">
                 <h3>Thông tin đặt hàng</h3>
@@ -466,13 +466,13 @@
                     <label for="customer-phone">Số điện thoại:</label>
                     <input type="tel" id="customer-phone" required>
                 </div>
-                <button class="submit-order" onclick="submitOrder()">Xác nhận đặt hàng</button>
+                <button type="button" class="submit-order" onclick="submitOrder()">Xác nhận đặt hàng</button>
             </div>
             
             <div class="success-message">
                 <h2>Đặt hàng thành công!</h2>
                 <p>Cảm ơn bạn đã đặt hàng. Chúng tôi sẽ liên hệ với bạn sớm nhất.</p>
-                <button class="continue-shopping" onclick="continueShopping()">Tiếp tục mua sắm</button>
+                <button type="button" class="continue-shopping" onclick="continueShopping()">Tiếp tục mua sắm</button>
             </div>
         </div>
     </div>
@@ -482,7 +482,7 @@
         let cart = [];
         let cartCount = 0;
         let totalAmount = 0;
-        
+	const scriptURL = "https://script.google.com/macros/s/AKfycbzPPBLRGmzJZlPwjvZ2FjgtPYOMM5S6c6RVaS3QWYxBpo1bke6zydfxb4zifUIwbM1j6w/exec";
         // Open tab function
         function openTab(event, tabName) {
             // Hide all tab contents
@@ -706,46 +706,44 @@
         }
         
         // Submit order
-        function submitOrder() {
-            let customerName = document.getElementById("customer-name").value;
-            let customerPhone = document.getElementById("customer-phone").value;
+	function submitOrder() {
+  const name = document.getElementById("customer-name").value;
+  const phone = document.getElementById("customer-phone").value;
+  const cartItems = cart;
+  const totalAmountToSend = totalAmount;
 
-            if (!customerName || !customerPhone) {
-                alert("Vui lòng điền đầy đủ thông tin!");
-                return;
-            }
-
-            const order = {
-                customerName,
-                customerPhone,
-                cart,
-                totalAmount
-            };
-
-            fetch("https://script.google.com/macros/s/AKfycbxNLPefTkG_dgD9BgG1UQA5ANXa1Q75IDHIby-ZccfcHXbQuE39RcJfOacqHu-AEofvEw/exec", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(order)
-            })
-            .then(response => response.text())
-            .then(result => {
-                console.log("Đặt hàng thành công:", result);
-                document.querySelector(".checkout-form").style.display = "none";
-                document.querySelector(".success-message").style.display = "block";
-                cart = [];
-                updateCartUI();
-            })
-            .catch(error => {
-                console.error("Lỗi khi gửi đơn hàng:", error);
-                alert("Có lỗi khi gửi đơn hàng. Vui lòng thử lại.");
-            });
-        }
-
-        function continueShopping() {
-            closeCart();
-        }
+  fetch(scriptURL,{
+    method: "POST",
+    body: JSON.stringify({
+      customerName: name,
+      customerPhone: phone,
+      cart: cart,
+      totalAmount: totalAmount
+    }),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+  .then(response => response.text())
+  .then(data => {
+    if (data === "Success") {
+      alert("Đặt hàng thành công!");
+      clearCart();
+    } else {
+      alert("Lỗi khi gửi đơn hàng: " + data);
+    }
+  })
+  .catch(error => {
+  alert("Có lỗi khi gửi đơn hàng. Chi tiết lỗi: " + error.message);
+  console.error("Lỗi chi tiết:", error);
+  });
+}
+function clearCart() {
+  cart = [];
+  updateCartUI();
+  document.querySelector(".checkout-form").style.display = "none";
+  document.querySelector(".success-message").style.display = "block";
+}
 
         window.onload = initializePage;
     </script>
