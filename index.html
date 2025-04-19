@@ -461,6 +461,44 @@
     }
 }
 
+
+/* --- Cải thiện hiển thị và khả năng nhấn trên mobile --- */
+.toast {
+    pointer-events: none;
+}
+
+.option-buttons {
+    z-index: 1;
+    position: relative;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.option-btn {
+    max-width: 100%;
+    white-space: nowrap;
+}
+
+.options {
+    margin-bottom: 20px;
+    padding: 10px 0;
+}
+
+/* Tăng kích thước nút trên thiết bị nhỏ */
+@media screen and (max-width: 480px) {
+    .option-btn {
+        padding: 12px 18px;
+        font-size: 16px;
+    }
+
+    .add-to-cart,
+    .checkout-btn,
+    .submit-order {
+        font-size: 18px;
+        padding: 14px;
+    }
+}
 </style>
 </head>
 <body>
