@@ -160,7 +160,10 @@
             cursor: pointer;
             border-radius: 20px;
             transition: all 0.3s ease;
-        }
+        
+touch-action: manipulation;
+-webkit-tap-highlight-color: transparent;
+}
         
         .option-btn.selected {
             background-color: #8B4513;
@@ -693,7 +696,7 @@
             // Add event listeners to option buttons
             let optionButtons = document.querySelectorAll(".option-btn");
             optionButtons.forEach(button => {
-                button.addEventListener("click", function() {
+                button.addEventListener("pointerdown", function() {
                     // Remove selected class from siblings
                     let siblings = this.parentElement.querySelectorAll(".option-btn");
                     siblings.forEach(sib => sib.classList.remove("selected"));
@@ -706,7 +709,7 @@
             // Add event listeners to add-to-cart buttons
             let addToCartButtons = document.querySelectorAll(".add-to-cart");
             addToCartButtons.forEach(button => {
-                button.addEventListener("click", function() {
+                button.addEventListener("pointerdown", function() {
                     // Get product info
                     let productName = this.getAttribute("data-name");
                     let basePrice = parseInt(this.getAttribute("data-base-price"));
