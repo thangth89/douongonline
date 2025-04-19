@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Đặt Đồ Uống Online (Modular)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="header-container"></div>
+    <div class="container" id="product-container"></div>
+    <div id="cart-container"></div>
+    <div id="form-container"></div>
+
+    <script src="script.js"></script>
+    <script>
+        const includes = [
+            ["header-container", "header.html"],
+            ["product-container", "product.html"],
+            ["cart-container", "cart.html"],
+            ["form-container", "form.html"]
+        ];
+        includes.forEach(([id, file]) => {
+            fetch(file)
+                .then(res => res.text())
+                .then(html => document.getElementById(id).innerHTML = html);
+        });
+    </script>
+</body>
+</html>
