@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-
 <html lang="vi">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Website Đặt Đồ Uống Online</title>
-<style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Đặt Đồ Uống Online</title>
+    <style>
         * {
             margin: 0;
             padding: 0;
@@ -472,153 +471,137 @@ html {
     }
 }
 
-
-.hamburger {
-    display: none;
-    font-size: 28px;
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
-}
-
-@media screen and (max-width: 768px) {
-    .hamburger {
-        display: block;
-    }
-    .main-menu {
-        display: none;
-        flex-direction: column;
-        background-color: #8B4513;
-        width: 100%;
-        padding: 10px 0;
-        border-radius: 0 0 8px 8px;
-    }
-    .main-menu.show {
-        display: flex;
-    }
-}
-
-.tab-content {
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-.tab-content.active {
-    opacity: 1;
-    transform: translateY(0);
-}
 </style>
 </head>
 <body>
-<header>
-<div class="container header-container">
-<h1>Đặt Đồ Uống Online</h1>
-<button class="hamburger" onclick="toggleMobileMenu()">☰</button><nav class="main-menu">
-<button class="menu-item active" onclick="openTab(event, 'coffee')">Cà Phê</button>
-<button class="menu-item" onclick="openTab(event, 'milktea')">Trà Sữa</button>
-</nav>
-</div>
-</header>
-<div class="container">
-<div class="tab-content active" id="coffee">
-<div class="product-grid">
-<div class="product">
-<img alt="Cà phê đen đá" src="images/caphe1.jpg"/>
-<h3>Cà Phê Đen Đá</h3>
-<div class="price">25.000 VNĐ</div>
-<div class="options">
-<div class="option-title">Chọn Size:</div>
-<div class="option-buttons size-options">
-<button class="option-btn selected" data-price="0" data-value="S">S</button>
-<button class="option-btn" data-price="5000" data-value="M">M (+5.000đ)</button>
-<button class="option-btn" data-price="10000" data-value="L">L (+10.000đ)</button>
-</div>
-</div>
-<button class="add-to-cart" data-base-price="25000" data-image="images/caphe1.jpg" data-name="Cà Phê Đen Đá" data-product-type="coffee">Thêm vào giỏ hàng</button>
-</div>
-<!-- Bạc sỉu -->
-<div class="product">
-<img alt="Bạc sỉu" src="images/bacsiu.jpg"/>
-<h3>Bạc Sỉu</h3>
-<div class="price">28.000 VNĐ</div>
-<div class="options">
-<div class="option-title">Chọn Size:</div>
-<div class="option-buttons size-options">
-<button class="option-btn selected" data-price="0" data-value="S">S</button>
-<button class="option-btn" data-price="5000" data-value="M">M (+5.000đ)</button>
-<button class="option-btn" data-price="10000" data-value="L">L (+10.000đ)</button>
-</div>
-</div>
-<button class="add-to-cart" data-base-price="28000" data-image="images/bacsiu.jpg" data-name="Bạc Sỉu" data-product-type="coffee">Thêm vào giỏ hàng</button>
-</div>
-</div>
-</div>
-<div class="tab-content" id="milktea">
-<div class="product">
-<img alt="Trà sữa truyền thống" src="/api/placeholder/400/320"/>
-<h3>Trà Sữa Truyền Thống</h3>
-<div class="price">30.000 VNĐ</div>
-<div class="options">
-<div class="option-title">Chọn Size:</div>
-<div class="option-buttons size-options">
-<button class="option-btn selected" data-price="0" data-value="S">S</button>
-<button class="option-btn" data-price="5000" data-value="M">M (+5.000đ)</button>
-<button class="option-btn" data-price="10000" data-value="L">L (+10.000đ)</button>
-</div>
-</div>
-<div class="options">
-<div class="option-title">Độ Ngọt:</div>
-<div class="option-buttons sugar-options">
-<button class="option-btn" data-value="30%">30%</button>
-<button class="option-btn selected" data-value="50%">50%</button>
-<button class="option-btn" data-value="70%">70%</button>
-<button class="option-btn" data-value="100%">100%</button>
-</div>
-</div>
-<button class="add-to-cart" data-base-price="30000" data-image="/api/placeholder/400/320" data-name="Trà Sữa Truyền Thống" data-product-type="milktea">Thêm vào giỏ hàng</button>
-</div>
-</div>
-</div>
-<div class="cart-icon" onclick="openCart()">
+    <header>
+        <div class="container header-container">
+            <h1>Đặt Đồ Uống Online</h1>
+            <nav class="main-menu">
+                <button class="menu-item active" onclick="openTab(event, 'coffee')">Cà Phê</button>
+                <button class="menu-item" onclick="openTab(event, 'milktea')">Trà Sữa</button>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div id="coffee" class="tab-content active">
+            <div class="product-grid">
+                <div class="product">
+                    <img src="images/caphe1.jpg" alt="Cà phê đen đá">
+                    <h3>Cà Phê Đen Đá</h3>
+                    <div class="price">25.000 VNĐ</div>
+                    <div class="options">
+                        <div class="option-title">Chọn Size:</div>
+                        <div class="option-buttons size-options">
+                            <button class="option-btn selected" data-value="S" data-price="0">S</button>
+                            <button class="option-btn" data-value="M" data-price="5000">M (+5.000đ)</button>
+                            <button class="option-btn" data-value="L" data-price="10000">L (+10.000đ)</button>
+                        </div>
+                    </div>
+                    <button class="add-to-cart" 
+                            data-name="Cà Phê Đen Đá" 
+                            data-base-price="25000" 
+                            data-image="images/caphe1.jpg"
+                            data-product-type="coffee">Thêm vào giỏ hàng</button>
+                </div>
+        
+                <!-- Bạc sỉu -->
+                <div class="product">
+                    <img src="images/bacsiu.jpg" alt="Bạc sỉu">
+                    <h3>Bạc Sỉu</h3>
+                    <div class="price">28.000 VNĐ</div>
+                    <div class="options">
+                        <div class="option-title">Chọn Size:</div>
+                        <div class="option-buttons size-options">
+                            <button class="option-btn selected" data-value="S" data-price="0">S</button>
+                            <button class="option-btn" data-value="M" data-price="5000">M (+5.000đ)</button>
+                            <button class="option-btn" data-value="L" data-price="10000">L (+10.000đ)</button>
+                        </div>
+                    </div>
+                    <button class="add-to-cart" 
+                            data-name="Bạc Sỉu" 
+                            data-base-price="28000" 
+                            data-image="images/bacsiu.jpg"
+                            data-product-type="coffee">Thêm vào giỏ hàng</button>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div id="milktea" class="tab-content">
+            <div class="product">
+                <img src="/api/placeholder/400/320" alt="Trà sữa truyền thống">
+                <h3>Trà Sữa Truyền Thống</h3>
+                <div class="price">30.000 VNĐ</div>
+                <div class="options">
+                    <div class="option-title">Chọn Size:</div>
+                    <div class="option-buttons size-options">
+                        <button class="option-btn selected" data-value="S" data-price="0">S</button>
+                        <button class="option-btn" data-value="M" data-price="5000">M (+5.000đ)</button>
+                        <button class="option-btn" data-value="L" data-price="10000">L (+10.000đ)</button>
+                    </div>
+                </div>
+                <div class="options">
+                    <div class="option-title">Độ Ngọt:</div>
+                    <div class="option-buttons sugar-options">
+                        <button class="option-btn" data-value="30%">30%</button>
+                        <button class="option-btn selected" data-value="50%">50%</button>
+                        <button class="option-btn" data-value="70%">70%</button>
+                        <button class="option-btn" data-value="100%">100%</button>
+                    </div>
+                </div>
+                <button class="add-to-cart" 
+                        data-name="Trà Sữa Truyền Thống" 
+                        data-base-price="30000" 
+                        data-image="/api/placeholder/400/320"
+                        data-product-type="milktea">Thêm vào giỏ hàng</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="cart-icon" onclick="openCart()">
         🛒
         <div class="cart-count">0</div>
-</div>
-<div class="cart-modal">
-<div class="cart-content">
-<div class="cart-header">
-<h2>Giỏ hàng của bạn</h2>
-<button class="close-cart" onclick="closeCart()">×</button>
-</div>
-<div class="cart-items">
-<!-- Cart items will be inserted here -->
-</div>
-<div class="cart-total">Tổng tiền: 0 VNĐ</div>
-<button class="checkout-btn" onclick="showCheckoutForm()">Đặt hàng</button>
-<div class="checkout-form">
-<h3>Thông tin đặt hàng</h3>
-<div class="form-group">
-<label for="customer-name">Họ và tên:</label>
-<input id="customer-name" required="" type="text"/>
-</div>
-<div class="form-group">
-<label for="customer-phone">Số điện thoại:</label>
-<input id="customer-phone" required="" type="tel"/>
-</div>
-<button class="submit-order" onclick="submitOrder()">Xác nhận đặt hàng</button>
-</div>
-<div class="success-message">
-<h2>Đặt hàng thành công!</h2>
-<p>Cảm ơn bạn đã đặt hàng. Chúng tôi sẽ liên hệ với bạn sớm nhất.</p>
-<button class="continue-shopping" onclick="continueShopping()">Tiếp tục mua sắm</button>
-</div>
-</div>
-</div>
-<script>
-function toggleMobileMenu() {
-    document.querySelector(".main-menu").classList.toggle("show");
-}
+    </div>
+    
+    <div class="cart-modal">
+        <div class="cart-content">
+            <div class="cart-header">
+                <h2>Giỏ hàng của bạn</h2>
+                <button class="close-cart" onclick="closeCart()">&times;</button>
+            </div>
+            
+            <div class="cart-items">
+                <!-- Cart items will be inserted here -->
+            </div>
+            
+            <div class="cart-total">Tổng tiền: 0 VNĐ</div>
+            
+            <button class="checkout-btn" onclick="showCheckoutForm()">Đặt hàng</button>
+            
+            <div class="checkout-form">
+                <h3>Thông tin đặt hàng</h3>
+                <div class="form-group">
+                    <label for="customer-name">Họ và tên:</label>
+                    <input type="text" id="customer-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="customer-phone">Số điện thoại:</label>
+                    <input type="tel" id="customer-phone" required>
+                </div>
+                <button class="submit-order" onclick="submitOrder()">Xác nhận đặt hàng</button>
+            </div>
+            
+            <div class="success-message">
+                <h2>Đặt hàng thành công!</h2>
+                <p>Cảm ơn bạn đã đặt hàng. Chúng tôi sẽ liên hệ với bạn sớm nhất.</p>
+                <button class="continue-shopping" onclick="continueShopping()">Tiếp tục mua sắm</button>
+            </div>
+        </div>
+    </div>
 
+    <script>
         // Global variables
         let cart = [];
         let cartCount = 0;
@@ -912,9 +895,11 @@ modal.classList.remove("show");
         // Initialize page when loaded
         window.onload = initializePage;
     </script>
-<div class="toast" id="toast">Đã thêm vào giỏ hàng</div>
+<div id="toast" class="toast">Đã thêm vào giỏ hàng</div>
+
 <audio id="addSound" preload="auto">
-<source src="ting.mp3" type="audio/mpeg"/>
+    <source src="ting.mp3" type="audio/mpeg">
 </audio>
+
 </body>
 </html>
