@@ -131,15 +131,39 @@
     width: 100%;
   }
 
+  .hero-section {
+    padding: 20px;
+  }
+
   .hero-text h2 {
-    font-size: 22px;
-    line-height: 1.5;
-    margin-bottom: 12px;
+    font-size: 18px;
+    line-height: 1.4;
+    font-weight: 700;
+    text-transform: uppercase;
+    word-break: break-word;
+    margin-bottom: 10px;
   }
 
   .hero-text p {
-    font-size: 16px;
-    margin: 6px 0;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 8px;
+  }
+
+  .hero-text li {
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 6px;
+    list-style: none;
+  }
+
+  .hero-text ul {
+    padding-left: 0;
+  }
+
+  .hero-text li::before {
+    content: "✔️ ";
+    color: green;
   }
 
   .hero-img {
