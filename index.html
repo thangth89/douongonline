@@ -1,153 +1,401 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website Đặt Đồ Uống Online</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <title>Tài Chính Online</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #fff8e1;
+    }
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: linear-gradient(to right, #ff8008, #ffc837);
+      color: white;
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 24px;
+      color: #fff;
+    }
+    nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-right: 80px;
+}
 
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0;
+  background: none;
+  border-radius: 0;
+  font-size: 20px;
+}
+
+nav a.active {
+  text-decoration: underline;
+  color: #220afa;
+}
+
+nav a:hover {
+  color: #ff2508;
+}
+
+nav .divider {
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+    .hero {
+      margin-top: 70px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(to right, #ffb347, #ffcc33);
+      padding: 40px;
+      color: #333;
+    }
+    .hero-text {
+      max-width: 50%;
+    }
+    .hero-text h2 {
+      font-size: 32px;
+      color: #6a1b9a;
+    }
+    .hero-text p {
+      margin: 10px 0;
+      font-size: 18px;
+    }
+    .hero-img img {
+      max-height: 300px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .section {
+      padding: 10px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background-color: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+      border-top: 6px solid orange;
+    }
+
+    .card h3 {
+      color: #d32f2f;
+      margin-top: 0;
+    }
+
+    .card p {
+      margin: 8px 0;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    button {
+      padding: 10px 16px;
+      background-color: orange;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+      }
+      .hero-text, .hero-img {
+        max-width: 100%;
+      }
+    }
+  .products-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px; /* giảm khoảng cách giữa các thẻ */
+    justify-content: center;
+    max-width: 1100px; /* giới hạn chiều rộng container */
+    margin: 30px auto 0;
+    }
+    .section-title {
+    text-align: center;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <div class="container header-container">
-            <h1>Đặt Đồ Uống Online</h1>
-            <nav class="main-menu">
-                <button class="menu-item active" onclick="openTab(event, 'coffee')">Cà Phê</button>
-                <button class="menu-item" onclick="openTab(event, 'milktea')">Trà Sữa</button>
-            </nav>
-        </div>
-    </header>
-    
-    <div class="container">
-        <div id="coffee" class="tab-content active">
-            <div class="product-grid">
-                <div class="product">
-                    <img src="images/caphe1.jpg" alt="Cà phê đen đá">
-                    <h3>Cà Phê Đen Đá</h3>
-                    <div class="price">25.000 VNĐ</div>
-                    <div class="options">
-                        <div class="option-title">Chọn Size:</div>
-                        <div class="option-buttons size-options">
-                            <button class="option-btn selected" data-value="S" data-price="0">S</button>
-                            <button class="option-btn" data-value="M" data-price="5000">M (+5K)</button>
-                            <button class="option-btn" data-value="L" data-price="10000">L (+10K)</button>
-                        </div>
-                    </div>
-                    <button class="add-to-cart" 
-                            data-name="Cà Phê Đen Đá" 
-                            data-base-price="25000" 
-                            data-image="images/caphe1.jpg"
-                            data-product-type="coffee">Thêm vào giỏ hàng</button>
-                </div>
-        
-                <!-- Bạc sỉu -->
-                <div class="product">
-                    <img src="images/bacsiu.jpg" alt="Bạc sỉu">
-                    <h3>Bạc Sỉu</h3>
-                    <div class="price">28.000 VNĐ</div>
-                    <div class="options">
-                        <div class="option-title">Chọn Size:</div>
-                        <div class="option-buttons size-options">
-                            <button class="option-btn selected" data-value="S" data-price="0">S</button>
-                            <button class="option-btn" data-value="M" data-price="5000">M (+5K)</button>
-                            <button class="option-btn" data-value="L" data-price="10000">L (+10K)</button>
-                        </div>
-                    </div>
-                    <button class="add-to-cart" 
-                            data-name="Bạc Sỉu" 
-                            data-base-price="28000" 
-                            data-image="images/bacsiu.jpg"
-                            data-product-type="coffee">Thêm vào giỏ hàng</button>
-                </div>
-            </div>
-        </div>
-        
-        
-        <div id="milktea" class="tab-content">
-            <div class="product">
-                <img src="/api/placeholder/400/320" alt="Trà sữa truyền thống">
-                <h3>Trà Sữa Truyền Thống</h3>
-                <div class="price">30.000 VNĐ</div>
-                <div class="options">
-                    <div class="option-title">Chọn Size:</div>
-                    <div class="option-buttons size-options">
-                        <button class="option-btn selected" data-value="S" data-price="0">S</button>
-                        <button class="option-btn" data-value="M" data-price="5000">M (+5K)</button>
-                        <button class="option-btn" data-value="L" data-price="10000">L (+10K)</button>
-                    </div>
-                </div>
-                <div class="options">
-                    <div class="option-title">Độ Ngọt:</div>
-                    <div class="option-buttons sugar-options">
-                        <button class="option-btn" data-value="30%">30%</button>
-                        <button class="option-btn selected" data-value="50%">50%</button>
-                        <button class="option-btn" data-value="70%">70%</button>
-                        <button class="option-btn" data-value="100%">100%</button>
-                    </div>
-                </div>
-                <button class="add-to-cart" 
-                        data-name="Trà Sữa Truyền Thống" 
-                        data-base-price="30000" 
-                        data-image="/api/placeholder/400/320"
-                        data-product-type="milktea">Thêm vào giỏ hàng</button>
-            </div>
-        </div>
+  <header>
+    <h1>TAICHINH8386.ONLINE</h1>
+    <nav>
+      <a href="#" id="menu-vay" class="active">Vay tiền</a>
+      <a href="#" id="menu-the">Thẻ tín dụng</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-text">
+      <h2>VAY TIỀN ONLINE NHANH 24/7<br>CHỈ CẦN CMND</h2>
+      <p>✔ Vay tiền online 24/7 tại nhà với thủ tục đơn giản.</p>
+      <p>✔ Lãi suất 0% cho khoản vay đầu.</p>
+      <p>✔ Hỗ trợ hạn mức vay từ 1 triệu – 500 triệu chỉ cần CMND</p>
+      <p>✔ Không gọi thẩm định người thân.</p>
     </div>
-    
-    <div class="cart-icon" onclick="openCart()">
-        🛒
-        <div class="cart-count">0</div>
+    <div class="hero-img">
+      <img src="db0f5a1f-8c4e-478e-a434-cb8c6829faf7.png" alt="minh họa" />
     </div>
+  </section>
+
+  <section class="section" id="vay-section">
+    <h2 class="section-title">TOP 3 VAY TIỀN ONLINE</h2>
+  <div class="products-container">
+    <div class="product-card" style="background: white; border-radius: 10px; width: 300px; padding: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); position: relative; text-align: center;">
+      <div style="position: absolute; top: 0px; left: 0px; background: red; color: white; font-weight: bold; padding: 3px 8px; border-radius: 5px;">TOP #1 tốt nhất</div>
+      <div style="position: absolute; top: 0px; right: 0px; background: red; color: white; font-weight: bold; padding: 3px 8px; border-radius: 5px;">NEW</div>
     
-    <div class="cart-modal">
-        <div class="cart-content">
-            <div class="cart-header">
-                <h2>Giỏ hàng của bạn</h2>
-                <button class="close-cart" onclick="closeCart()">&times;</button>
-            </div>
-            
-            <div class="cart-items">
-                <!-- Cart items will be inserted here -->
-            </div>
-            
-            <div class="cart-total">Tổng tiền: 0 VNĐ</div>
-            
-            <button class="checkout-btn" onclick="showCheckoutForm()">Đặt hàng</button>
-            
-            <div class="checkout-form">
-                <h3>Thông tin đặt hàng</h3>
-                <div class="form-group">
-                    <label for="customer-name">Họ và tên:</label>
-                    <input type="text" id="customer-name" required>
-                </div>
-                <div class="form-group">
-                    <label for="customer-phone">Số điện thoại:</label>
-                    <input type="tel" id="customer-phone" required>
-                </div>
-                <button class="submit-order" onclick="submitOrder()">Xác nhận đặt hàng</button>
-            </div>
-            
-            <div class="success-message">
-                <h2>Đặt hàng thành công!</h2>
-                <p>Cảm ơn bạn đã đặt hàng. Chúng tôi sẽ liên hệ với bạn sớm nhất.</p>
-                <button class="continue-shopping" onclick="continueShopping()">Tiếp tục mua sắm</button>
-            </div>
-        </div>
+      <img src="https://linklogo.com/jeffapp.png" alt="Jeff App" style="max-width: 100px; margin: 20px auto;">
+      <h3 style="color: orangered;">Jeff App</h3>
+      <p style="color: red; font-weight: bold;">📌 DUYỆT VAY NHANH</p>
+      <p style="font-size: 20px; font-weight: bold; color: orangered;">1 – 30 triệu</p>
+    
+      <ul style="list-style: none;text-align: left; font-size: 14px; line-height: 2;">
+        <li>✓ Thời hạn vay: 3 – 12 tháng.</li>
+        <li>✓ Lãi suất: <strong>0%</strong> khoản vay đầu.</li>
+        <li>✓ Trả góp từng tháng hoặc cuối kỳ.</Li>
+        <li>✓ 22 tuổi trở lên.</li>
+        <li>✓ Hồ sơ chỉ cần CMND.</li>
+      </ul>
+      
+      <button style="margin-top: 15px; background: #FFD700; border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer;">
+        ĐĂNG KÝ VAY
+      </button>
     </div>
-
+    <div class="product-card" style="background: white; border-radius: 10px; width: 300px; padding: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); position: relative; text-align: center;">
+      <div style="position: absolute; top: 0px; left: 0px; background: red; color: white; font-weight: bold; padding: 3px 8px; border-radius: 5px;">TOP #1 tốt nhất</div>
+      <div style="position: absolute; top: 0px; right: 0px; background: red; color: white; font-weight: bold; padding: 3px 8px; border-radius: 5px;">NEW</div>
     
+      <img src="https://linklogo.com/jeffapp.png" alt="Jeff App" style="max-width: 100px; margin: 20px auto;">
+      <h3 style="color: orangered;">Jeff App</h3>
+      <p style="color: red; font-weight: bold;">📌 DUYỆT VAY NHANH</p>
+      <p style="font-size: 20px; font-weight: bold; color: orangered;">1 – 30 triệu</p>
+    
+      <ul style="list-style: none;text-align: left; font-size: 14px; line-height: 2;">
+        <li>✓ Thời hạn vay: 3 – 12 tháng.</li>
+        <li>✓ Lãi suất: <strong>0%</strong> khoản vay đầu.</li>
+        <li>✓ Trả góp từng tháng hoặc cuối kỳ.</Li>
+        <li>✓ 22 tuổi trở lên.</li>
+        <li>✓ Hồ sơ chỉ cần CMND.</li>
+      </ul>
+      
+      <button style="margin-top: 15px; background: #FFD700; border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer;">
+        ĐĂNG KÝ VAY
+      </button>
+    </div>
+    <div class="product-card" style="background: white; border-radius: 10px; width: 300px; padding: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); position: relative; text-align: center;">
+      <div style="position: absolute; top: 0px; left: 0px; background: red; color: white; font-weight: bold; padding: 3px 8px; border-radius: 5px;">TOP #1 tốt nhất</div>
+      <div style="position: absolute; top: 0px; right: 0px; background: red; color: white; font-weight: bold; padding: 3px 8px; border-radius: 5px;">NEW</div>
+    
+      <img src="https://linklogo.com/jeffapp.png" alt="Jeff App" style="max-width: 100px; margin: 20px auto;">
+      <h3 style="color: orangered;">Jeff App</h3>
+      <p style="color: red; font-weight: bold;">📌 DUYỆT VAY NHANH</p>
+      <p style="font-size: 20px; font-weight: bold; color: orangered;">1 – 30 triệu</p>
+    
+      <ul style="list-style: none;text-align: left; font-size: 14px; line-height: 2;">
+        <li>✓ Thời hạn vay: 3 – 12 tháng.</li>
+        <li>✓ Lãi suất: <strong>0%</strong> khoản vay đầu.</li>
+        <li>✓ Trả góp từng tháng hoặc cuối kỳ.</Li>
+        <li>✓ 22 tuổi trở lên.</li>
+        <li>✓ Hồ sơ chỉ cần CMND.</li>
+      </ul>
+      
+      <button style="margin-top: 15px; background: #FFD700; border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer;">
+        ĐĂNG KÝ VAY
+      </button>
+    </div>
+    <div class="product-card" style="background: white; border-radius: 10px; width: 300px; padding: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); position: relative; text-align: center;">
+      <div style="position: absolute; top: 0px; left: 0px; background: red; color: white; font-weight: bold; padding: 3px 8px; border-radius: 5px;">TOP #1 tốt nhất</div>
+      <div style="position: absolute; top: 0px; right: 0px; background: red; color: white; font-weight: bold; padding: 3px 8px; border-radius: 5px;">NEW</div>
+    
+      <img src="https://linklogo.com/jeffapp.png" alt="Jeff App" style="max-width: 100px; margin: 20px auto;">
+      <h3 style="color: orangered;">Jeff App</h3>
+      <p style="color: red; font-weight: bold;">📌 DUYỆT VAY NHANH</p>
+      <p style="font-size: 20px; font-weight: bold; color: orangered;">1 – 30 triệu</p>
+    
+      <ul style="list-style: none;text-align: left; font-size: 14px; line-height: 2;">
+        <li>✓ Thời hạn vay: 3 – 12 tháng.</li>
+        <li>✓ Lãi suất: <strong>0%</strong> khoản vay đầu.</li>
+        <li>✓ Trả góp từng tháng hoặc cuối kỳ.</Li>
+        <li>✓ 22 tuổi trở lên.</li>
+        <li>✓ Hồ sơ chỉ cần CMND.</li>
+      </ul>
+      
+      <button style="margin-top: 15px; background: #FFD700; border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer;">
+        ĐĂNG KÝ VAY
+      </button>
+    </div>
+    <div class="product-card" style="background: white; border-radius: 10px; width: 300px; padding: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); position: relative; text-align: center;">
+      <div style="position: absolute; top: 0px; left: 0px; background: red; color: white; font-weight: bold; padding: 3px 8px; border-radius: 5px;">TOP #1 tốt nhất</div>
+      <div style="position: absolute; top: 0px; right: 0px; background: red; color: white; font-weight: bold; padding: 3px 8px; border-radius: 5px;">NEW</div>
+    
+      <img src="https://linklogo.com/jeffapp.png" alt="Jeff App" style="max-width: 100px; margin: 20px auto;">
+      <h3 style="color: orangered;">Jeff App</h3>
+      <p style="color: red; font-weight: bold;">📌 DUYỆT VAY NHANH</p>
+      <p style="font-size: 20px; font-weight: bold; color: orangered;">1 – 30 triệu</p>
+    
+      <ul style="list-style: none;text-align: left; font-size: 14px; line-height: 2;">
+        <li>✓ Thời hạn vay: 3 – 12 tháng.</li>
+        <li>✓ Lãi suất: <strong>0%</strong> khoản vay đầu.</li>
+        <li>✓ Trả góp từng tháng hoặc cuối kỳ.</Li>
+        <li>✓ 22 tuổi trở lên.</li>
+        <li>✓ Hồ sơ chỉ cần CMND.</li>
+      </ul>
+      
+      <button style="margin-top: 15px; background: #FFD700; border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer;">
+        ĐĂNG KÝ VAY
+      </button>
+    </div>
+  </div>
+  </section>
 
-<script src="js/cart.js"></script>
-<script src="js/product.js"></script>
-<script src="js/ui.js"></script>
-<script src="js/main.js"></script>
+  <section class="section hidden" id="the-section">
+    <h2>CÁC ĐƠN VỊ PHÁT HÀNH THẺ</h2>
+    <div class="products-container">
+    <div class="product-card" style="background: white; border-radius: 10px; width: 300px; padding: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); position: relative; text-align: center;">
+      <div style="position: absolute; top: 0px; left: 0px; background: red; color: white; font-weight: bold; padding: 3px 8px; border-radius: 5px;">TOP #1 tốt nhất</div>
+      <div style="position: absolute; top: 0px; right: 0px; background: red; color: white; font-weight: bold; padding: 3px 8px; border-radius: 5px;">NEW</div>
+    
+      <img src="https://linklogo.com/jeffapp.png" alt="Jeff App" style="max-width: 100px; margin: 20px auto;">
+      <h3 style="color: orangered;">Jeff App</h3>
+      <p style="color: red; font-weight: bold;">📌 DUYỆT VAY NHANH</p>
+      <p style="font-size: 20px; font-weight: bold; color: orangered;">1 – 30 triệu</p>
+    
+      <ul style="list-style: none;text-align: left; font-size: 14px; line-height: 2;">
+        <li>✓ Thời hạn vay: 3 – 12 tháng.</li>
+        <li>✓ Lãi suất: <strong>0%</strong> khoản vay đầu.</li>
+        <li>✓ Trả góp từng tháng hoặc cuối kỳ.</Li>
+        <li>✓ 22 tuổi trở lên.</li>
+        <li>✓ Hồ sơ chỉ cần CMND.</li>
+      </ul>
+      
+      <button style="margin-top: 15px; background: #FFD700; border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer;">
+        ĐĂNG KÝ VAY
+      </button>
+    </div>
+    <div class="product-card" style="background: white; border-radius: 10px; width: 300px; padding: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); position: relative; text-align: center;">
+      <div style="position: absolute; top: 0px; left: 0px; background: red; color: white; font-weight: bold; padding: 3px 8px; border-radius: 5px;">TOP #1 tốt nhất</div>
+      <div style="position: absolute; top: 0px; right: 0px; background: red; color: white; font-weight: bold; padding: 3px 8px; border-radius: 5px;">NEW</div>
+    
+      <img src="https://linklogo.com/jeffapp.png" alt="Jeff App" style="max-width: 100px; margin: 20px auto;">
+      <h3 style="color: orangered;">Jeff App</h3>
+      <p style="color: red; font-weight: bold;">📌 DUYỆT VAY NHANH</p>
+      <p style="font-size: 20px; font-weight: bold; color: orangered;">1 – 30 triệu</p>
+    
+      <ul style="list-style: none;text-align: left; font-size: 14px; line-height: 2;">
+        <li>✓ Thời hạn vay: 3 – 12 tháng.</li>
+        <li>✓ Lãi suất: <strong>0%</strong> khoản vay đầu.</li>
+        <li>✓ Trả góp từng tháng hoặc cuối kỳ.</Li>
+        <li>✓ 22 tuổi trở lên.</li>
+        <li>✓ Hồ sơ chỉ cần CMND.</li>
+      </ul>
+      
+      <button style="margin-top: 15px; background: #FFD700; border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer;">
+        ĐĂNG KÝ VAY
+      </button>
+    </div>
+    <div class="product-card" style="background: white; border-radius: 10px; width: 300px; padding: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); position: relative; text-align: center;">
+      <div style="position: absolute; top: 0px; left: 0px; background: red; color: white; font-weight: bold; padding: 3px 8px; border-radius: 5px;">TOP #1 tốt nhất</div>
+      <div style="position: absolute; top: 0px; right: 0px; background: red; color: white; font-weight: bold; padding: 3px 8px; border-radius: 5px;">NEW</div>
+    
+      <img src="https://linklogo.com/jeffapp.png" alt="Jeff App" style="max-width: 100px; margin: 20px auto;">
+      <h3 style="color: orangered;">Jeff App</h3>
+      <p style="color: red; font-weight: bold;">📌 DUYỆT VAY NHANH</p>
+      <p style="font-size: 20px; font-weight: bold; color: orangered;">1 – 30 triệu</p>
+    
+      <ul style="list-style: none;text-align: left; font-size: 14px; line-height: 2;">
+        <li>✓ Thời hạn vay: 3 – 12 tháng.</li>
+        <li>✓ Lãi suất: <strong>0%</strong> khoản vay đầu.</li>
+        <li>✓ Trả góp từng tháng hoặc cuối kỳ.</Li>
+        <li>✓ 22 tuổi trở lên.</li>
+        <li>✓ Hồ sơ chỉ cần CMND.</li>
+      </ul>
+      
+      <button style="margin-top: 15px; background: #FFD700; border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer;">
+        ĐĂNG KÝ VAY
+      </button>
+    </div>
+    <div class="product-card" style="background: white; border-radius: 10px; width: 300px; padding: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); position: relative; text-align: center;">
+      <div style="position: absolute; top: 0px; left: 0px; background: red; color: white; font-weight: bold; padding: 3px 8px; border-radius: 5px;">TOP #1 tốt nhất</div>
+      <div style="position: absolute; top: 0px; right: 0px; background: red; color: white; font-weight: bold; padding: 3px 8px; border-radius: 5px;">NEW</div>
+    
+      <img src="https://linklogo.com/jeffapp.png" alt="Jeff App" style="max-width: 100px; margin: 20px auto;">
+      <h3 style="color: orangered;">Jeff App</h3>
+      <p style="color: red; font-weight: bold;">📌 DUYỆT VAY NHANH</p>
+      <p style="font-size: 20px; font-weight: bold; color: orangered;">1 – 30 triệu</p>
+    
+      <ul style="list-style: none;text-align: left; font-size: 14px; line-height: 2;">
+        <li>✓ Thời hạn vay: 3 – 12 tháng.</li>
+        <li>✓ Lãi suất: <strong>0%</strong> khoản vay đầu.</li>
+        <li>✓ Trả góp từng tháng hoặc cuối kỳ.</Li>
+        <li>✓ 22 tuổi trở lên.</li>
+        <li>✓ Hồ sơ chỉ cần CMND.</li>
+      </ul>
+      
+      <button style="margin-top: 15px; background: #FFD700; border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer;">
+        ĐĂNG KÝ VAY
+      </button>
+    </div>
+    </div>
+  </section>
 
+  <script>
+    const menuVay = document.getElementById("menu-vay");
+    const menuThe = document.getElementById("menu-the");
+    const vaySection = document.getElementById("vay-section");
+    const theSection = document.getElementById("the-section");
 
-<div id="toast" class="toast">Đã thêm vào giỏ hàng</div>
+    menuVay.addEventListener("click", (e) => {
+      e.preventDefault();
+      menuVay.classList.add("active");
+      menuThe.classList.remove("active");
+      vaySection.classList.remove("hidden");
+      theSection.classList.add("hidden");
+    });
 
-<audio id="addSound" preload="auto">
-    <source src="ting.mp3" type="audio/mpeg">
-</audio>
-
+    menuThe.addEventListener("click", (e) => {
+      e.preventDefault();
+      menuVay.classList.remove("active");
+      menuThe.classList.add("active");
+      vaySection.classList.add("hidden");
+      theSection.classList.remove("hidden");
+    });
+  </script>
 </body>
 </html>
