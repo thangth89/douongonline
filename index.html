@@ -275,6 +275,7 @@
       huongDanSection.classList.add("hidden");
       introSection.classList.add("hidden"); // Ẩn phần giới thiệu khi chọn Vay tiền
       closeMenu();
+      vaySection.scrollIntoView({ behavior: "smooth" }); // Cuộn lên đầu phần Vay
     });
 
     menuThe.addEventListener("click", (e) => {
@@ -285,6 +286,7 @@
       huongDanSection.classList.add("hidden");
       introSection.classList.add("hidden"); // Ẩn phần giới thiệu khi chọn Thẻ tín dụng
       closeMenu();
+      theSection.scrollIntoView({ behavior: "smooth" }); // Cuộn lên đầu phần Thẻ
     });
 
     menuHuongDan.addEventListener("click", (e) => {
@@ -295,6 +297,7 @@
       huongDanSection.classList.remove("hidden");
       introSection.classList.remove("hidden"); // Hiển thị phần giới thiệu khi chọn Hướng dẫn
       closeMenu();
+      huongDanSection.scrollIntoView({ behavior: "smooth" }); // Cuộn lên đầu phần Hướng dẫn
     });
     
     // Thiết lập ban đầu - vì mặc định đang ở tab Vay tiền nên ẩn phần giới thiệu
