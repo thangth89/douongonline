@@ -83,14 +83,6 @@
       const menu = document.getElementById('nav-menu');
       menu.classList.toggle('hidden');
     }
-    
-    // Thêm hàm mới để đóng menu
-    function closeMenu() {
-      const menu = document.getElementById('nav-menu');
-      if (window.innerWidth < 768) { // Chỉ đóng menu khi đang ở chế độ mobile
-        menu.classList.add('hidden');
-      }
-    }
   </script>
 
   <script type="application/ld+json">
@@ -423,7 +415,6 @@
       theSection.classList.add("hidden");
       huongDanSection.classList.add("hidden");
       introSection.classList.add("hidden"); // Ẩn phần giới thiệu khi chọn Vay tiền
-      closeMenu();
       mainContent.scrollIntoView({ behavior: "smooth" }); // Cuộn đến mốc an toàn
     });
 
@@ -435,7 +426,6 @@
       theSection.classList.remove("hidden");
       huongDanSection.classList.add("hidden");
       introSection.classList.add("hidden"); // Ẩn phần giới thiệu khi chọn Thẻ tín dụng
-      closeMenu();
       mainContent.scrollIntoView({ behavior: "smooth" }); // Cuộn đến mốc an toàn
     });
 
@@ -447,7 +437,6 @@
       theSection.classList.add("hidden");
       huongDanSection.classList.remove("hidden");
       introSection.classList.remove("hidden"); // Hiển thị phần giới thiệu khi chọn Hướng dẫn
-      closeMenu();
       mainContent.scrollIntoView({ behavior: "smooth" }); // Cuộn đến mốc an toàn
     });
     
