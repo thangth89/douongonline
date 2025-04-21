@@ -45,6 +45,12 @@
       const menu = document.getElementById('nav-menu');
       menu.classList.toggle('hidden');
     }
+    function closeMenu() {
+      const menu = document.getElementById('nav-menu');
+      if (window.innerWidth < 768) { // Chỉ đóng menu khi đang ở chế độ mobile
+        menu.classList.add('hidden');
+      }
+    }
   </script>
 </head>
 <body class="bg-green-50">
@@ -264,6 +270,7 @@
       vaySection.classList.remove("hidden");
       theSection.classList.add("hidden");
       huongDanSection.classList.add("hidden");
+      closeMenu();
     });
 
     menuThe.addEventListener("click", (e) => {
@@ -272,6 +279,7 @@
       vaySection.classList.add("hidden");
       theSection.classList.remove("hidden");
       huongDanSection.classList.add("hidden");
+      closeMenu();
     });
 
     menuHuongDan.addEventListener("click", (e) => {
@@ -280,6 +288,7 @@
       vaySection.classList.add("hidden");
       theSection.classList.add("hidden");
       huongDanSection.classList.remove("hidden");
+      closeMenu();
     });
   </script>
 </body>
