@@ -6,6 +6,8 @@
   <title>Tài Chính Online</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
   <style>
+    /* Xóa bỏ các class label-top và label-new cũ */
+    
     /* Tạo nhãn TOP #1 bằng ::before */
     .card-with-top-label::before {
       content: "TOP #1";
@@ -45,6 +47,8 @@
       const menu = document.getElementById('nav-menu');
       menu.classList.toggle('hidden');
     }
+    
+    // Thêm hàm mới để đóng menu
     function closeMenu() {
       const menu = document.getElementById('nav-menu');
       if (window.innerWidth < 768) { // Chỉ đóng menu khi đang ở chế độ mobile
@@ -62,15 +66,17 @@
       </svg>
     </button>
     <nav id="nav-menu" class="w-full md:w-auto md:flex space-y-2 md:space-y-0 md:space-x-4 mt-2 md:mt-0 hidden md:block">
-      <a href="#" id="menu-vay" class="block md:inline-block px-3 py-2 rounded-md font-bold text-green-700 hover:text-green-900 active">Vay tiền</a>
+      <a href="#" id="menu-vay" class="block md:inline-block px-3 py-2 rounded-md font-bold text-green-700 hover:text-green-900">Vay tiền</a>
       <a href="#" id="menu-the" class="block md:inline-block px-3 py-2 rounded-md font-bold text-green-700 hover:text-green-900">Thẻ tín dụng</a>
-      <a href="#" id="menu-huongdan" class="block md:inline-block px-3 py-2 rounded-md font-bold text-green-700 hover:text-green-900">Hướng dẫn</a>
+      <a href="#" id="menu-huongdan" class="block md:inline-block px-3 py-2 rounded-md font-bold text-green-700 hover:text-green-900 text-green-900 underline">Hướng dẫn</a>
     </nav>
   </header>
+
   <!-- Thêm một phần tử div để dành chỗ cho header cố định -->
   <div class="pt-20"></div>
 
-  <section class="px-4 py-6 bg-green-100 text-green-900 text-center">
+  <!-- Thêm id="intro-section" và mặc định ẩn với class="hidden" -->
+  <section id="intro-section" class="px-4 py-6 bg-green-100 text-green-900 text-center hidden">
     <h2 class="text-2xl md:text-3xl font-bold text-green-700">VAY TIỀN ONLINE NHANH 24/7<br>CHỈ CẦN CMND</h2>
     <p class="mt-4">✔ Vay tiền online 24/7 tại nhà với thủ tục đơn giản.</p>
     <p>✔ Lãi suất 0% cho khoản vay đầu.</p>
@@ -79,7 +85,7 @@
     <img src="db0f5a1f-8c4e-478e-a434-cb8c6829faf7.png" alt="minh họa" class="mx-auto mt-4 max-h-64 rounded-xl shadow-md">
   </section>
 
-  <section class="px-4 py-6" id="vay-section">
+  <section class="px-4 py-6 hidden" id="vay-section">
     <h2 class="text-xl font-bold text-center text-green-700 mb-4">TOP 3 VAY TIỀN ONLINE</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
       <!-- Card 1 với TOP #1 và NEW -->
@@ -97,6 +103,7 @@
         </ul>
         <button class="w-full mt-4 bg-green-600 text-white font-semibold py-2 rounded hover:bg-green-700 transition">ĐĂNG KÝ VAY</button>
       </div>
+      
       <!-- Card 2 với TOP #1 và NEW -->
       <div class="bg-white p-4 rounded-lg shadow border border-green-100 relative card-with-top-label card-with-new-label">
         <img src="https://linklogo.com/jeffapp.png" class="w-24 mx-auto my-2">
@@ -112,6 +119,7 @@
         </ul>
         <button class="w-full mt-4 bg-green-600 text-white font-semibold py-2 rounded hover:bg-green-700 transition">ĐĂNG KÝ VAY</button>
       </div>
+      
       <!-- Card 3 với TOP #1 và NEW -->
       <div class="bg-white p-4 rounded-lg shadow border border-green-100 relative card-with-top-label card-with-new-label">
         <img src="https://linklogo.com/jeffapp.png" class="w-24 mx-auto my-2">
@@ -127,7 +135,24 @@
         </ul>
         <button class="w-full mt-4 bg-green-600 text-white font-semibold py-2 rounded hover:bg-green-700 transition">ĐĂNG KÝ VAY</button>
       </div>
+      
       <!-- Card 4 với TOP #1 và NEW -->
+      <div class="bg-white p-4 rounded-lg shadow border border-green-100 relative card-with-top-label card-with-new-label">
+        <img src="https://linklogo.com/jeffapp.png" class="w-24 mx-auto my-2">
+        <h3 class="text-lg font-semibold text-center text-green-700">Jeff App</h3>
+        <p class="text-center text-sm text-green-600 font-medium">📌 DUYỆT VAY NHANH</p>
+        <p class="text-center text-lg font-bold text-green-700">1 – 30 triệu</p>
+        <ul class="text-sm mt-2 list-disc list-inside text-green-800">
+          <li>Thời hạn vay: 3 – 12 tháng.</li>
+          <li>Lãi suất: <strong>0%</strong> khoản vay đầu.</li>
+          <li>Trả góp từng tháng hoặc cuối kỳ.</li>
+          <li>22 tuổi trở lên.</li>
+          <li>Hồ sơ chỉ cần CMND.</li>
+        </ul>
+        <button class="w-full mt-4 bg-green-600 text-white font-semibold py-2 rounded hover:bg-green-700 transition">ĐĂNG KÝ VAY</button>
+      </div>
+
+      <!-- Card 5 với TOP #1 và NEW -->
       <div class="bg-white p-4 rounded-lg shadow border border-green-100 relative card-with-top-label card-with-new-label">
         <img src="https://linklogo.com/jeffapp.png" class="w-24 mx-auto my-2">
         <h3 class="text-lg font-semibold text-center text-green-700">Jeff App</h3>
@@ -148,10 +173,10 @@
   <section class="px-4 py-6 hidden" id="the-section">
     <h2 class="text-xl font-bold text-center text-green-700 mb-4">CÁC ĐƠN VỊ PHÁT HÀNH THẺ</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-      <!-- Các card tương tự như trên, có thể thêm nhãn nếu cần -->
+      <!-- Các card 1 tương tự như trên, có thể thêm nhãn nếu cần -->
       <div class="bg-white p-4 rounded-lg shadow border border-green-100 relative card-with-top-label card-with-new-label">
         <img src="https://linklogo.com/jeffapp.png" class="w-24 mx-auto my-2">
-        <h3 class="text-lg font-semibold text-center text-green-700">Jeff App</h3>
+        <h3 class="text-lg font-semibold text-center text-green-700">MB Bank</h3>
         <p class="text-center text-sm text-green-600 font-medium">📌 DUYỆT VAY NHANH</p>
         <p class="text-center text-lg font-bold text-green-700">1 – 30 triệu</p>
         <ul class="text-sm mt-2 list-disc list-inside text-green-800">
@@ -163,9 +188,11 @@
         </ul>
         <button class="w-full mt-4 bg-green-600 text-white font-semibold py-2 rounded hover:bg-green-700 transition">ĐĂNG KÝ VAY</button>
       </div>
+
+      <!-- Các card 2 tương tự như trên, có thể thêm nhãn nếu cần -->
       <div class="bg-white p-4 rounded-lg shadow border border-green-100 relative card-with-top-label card-with-new-label">
         <img src="https://linklogo.com/jeffapp.png" class="w-24 mx-auto my-2">
-        <h3 class="text-lg font-semibold text-center text-green-700">Jeff App</h3>
+        <h3 class="text-lg font-semibold text-center text-green-700">SHBC BANK</h3>
         <p class="text-center text-sm text-green-600 font-medium">📌 DUYỆT VAY NHANH</p>
         <p class="text-center text-lg font-bold text-green-700">1 – 30 triệu</p>
         <ul class="text-sm mt-2 list-disc list-inside text-green-800">
@@ -177,9 +204,10 @@
         </ul>
         <button class="w-full mt-4 bg-green-600 text-white font-semibold py-2 rounded hover:bg-green-700 transition">ĐĂNG KÝ VAY</button>
       </div>
+      <!-- Các card 3 tương tự như trên, có thể thêm nhãn nếu cần -->
       <div class="bg-white p-4 rounded-lg shadow border border-green-100 relative card-with-top-label card-with-new-label">
         <img src="https://linklogo.com/jeffapp.png" class="w-24 mx-auto my-2">
-        <h3 class="text-lg font-semibold text-center text-green-700">Jeff App</h3>
+        <h3 class="text-lg font-semibold text-center text-green-700">Shinhan Bank</h3>
         <p class="text-center text-sm text-green-600 font-medium">📌 DUYỆT VAY NHANH</p>
         <p class="text-center text-lg font-bold text-green-700">1 – 30 triệu</p>
         <ul class="text-sm mt-2 list-disc list-inside text-green-800">
@@ -191,37 +219,11 @@
         </ul>
         <button class="w-full mt-4 bg-green-600 text-white font-semibold py-2 rounded hover:bg-green-700 transition">ĐĂNG KÝ VAY</button>
       </div>
+
+      <!-- Các card 4 tương tự như trên, có thể thêm nhãn nếu cần -->
       <div class="bg-white p-4 rounded-lg shadow border border-green-100 relative card-with-top-label card-with-new-label">
         <img src="https://linklogo.com/jeffapp.png" class="w-24 mx-auto my-2">
-        <h3 class="text-lg font-semibold text-center text-green-700">Jeff App</h3>
-        <p class="text-center text-sm text-green-600 font-medium">📌 DUYỆT VAY NHANH</p>
-        <p class="text-center text-lg font-bold text-green-700">1 – 30 triệu</p>
-        <ul class="text-sm mt-2 list-disc list-inside text-green-800">
-          <li>Thời hạn vay: 3 – 12 tháng.</li>
-          <li>Lãi suất: <strong>0%</strong> khoản vay đầu.</li>
-          <li>Trả góp từng tháng hoặc cuối kỳ.</li>
-          <li>22 tuổi trở lên.</li>
-          <li>Hồ sơ chỉ cần CMND.</li>
-        </ul>
-        <button class="w-full mt-4 bg-green-600 text-white font-semibold py-2 rounded hover:bg-green-700 transition">ĐĂNG KÝ VAY</button>
-      </div>
-      <div class="bg-white p-4 rounded-lg shadow border border-green-100 relative card-with-top-label card-with-new-label">
-        <img src="https://linklogo.com/jeffapp.png" class="w-24 mx-auto my-2">
-        <h3 class="text-lg font-semibold text-center text-green-700">Jeff App</h3>
-        <p class="text-center text-sm text-green-600 font-medium">📌 DUYỆT VAY NHANH</p>
-        <p class="text-center text-lg font-bold text-green-700">1 – 30 triệu</p>
-        <ul class="text-sm mt-2 list-disc list-inside text-green-800">
-          <li>Thời hạn vay: 3 – 12 tháng.</li>
-          <li>Lãi suất: <strong>0%</strong> khoản vay đầu.</li>
-          <li>Trả góp từng tháng hoặc cuối kỳ.</li>
-          <li>22 tuổi trở lên.</li>
-          <li>Hồ sơ chỉ cần CMND.</li>
-        </ul>
-        <button class="w-full mt-4 bg-green-600 text-white font-semibold py-2 rounded hover:bg-green-700 transition">ĐĂNG KÝ VAY</button>
-      </div>
-      <div class="bg-white p-4 rounded-lg shadow border border-green-100 relative card-with-top-label card-with-new-label">
-        <img src="https://linklogo.com/jeffapp.png" class="w-24 mx-auto my-2">
-        <h3 class="text-lg font-semibold text-center text-green-700">Jeff App</h3>
+        <h3 class="text-lg font-semibold text-center text-green-700">Vietcombank</h3>
         <p class="text-center text-sm text-green-600 font-medium">📌 DUYỆT VAY NHANH</p>
         <p class="text-center text-lg font-bold text-green-700">1 – 30 triệu</p>
         <ul class="text-sm mt-2 list-disc list-inside text-green-800">
@@ -237,7 +239,7 @@
     </div>
   </section>
 
-  <section class="px-4 py-6 hidden" id="huongdan-section">
+  <section class="px-4 py-6 " id="huongdan-section">
     <h2 class="text-xl font-bold text-center text-green-700 mb-4">HƯỚNG DẪN SỬ DỤNG</h2>
     <details class="bg-white p-4 rounded-lg shadow mb-4">
       <summary class="font-semibold cursor-pointer text-green-800">📌 Hướng dẫn vay tiền</summary>
@@ -256,6 +258,7 @@
     const vaySection = document.getElementById("vay-section");
     const theSection = document.getElementById("the-section");
     const huongDanSection = document.getElementById("huongdan-section");
+    const introSection = document.getElementById("intro-section"); // Thêm tham chiếu đến intro-section
 
     function setActive(menu) {
       menuVay.classList.remove("text-green-900", "underline");
@@ -270,6 +273,7 @@
       vaySection.classList.remove("hidden");
       theSection.classList.add("hidden");
       huongDanSection.classList.add("hidden");
+      introSection.classList.add("hidden"); // Ẩn phần giới thiệu khi chọn Vay tiền
       closeMenu();
     });
 
@@ -279,6 +283,7 @@
       vaySection.classList.add("hidden");
       theSection.classList.remove("hidden");
       huongDanSection.classList.add("hidden");
+      introSection.classList.add("hidden"); // Ẩn phần giới thiệu khi chọn Thẻ tín dụng
       closeMenu();
     });
 
@@ -288,8 +293,12 @@
       vaySection.classList.add("hidden");
       theSection.classList.add("hidden");
       huongDanSection.classList.remove("hidden");
+      introSection.classList.remove("hidden"); // Hiển thị phần giới thiệu khi chọn Hướng dẫn
       closeMenu();
     });
+    
+    // Thiết lập ban đầu - vì mặc định đang ở tab Vay tiền nên ẩn phần giới thiệu
+    introSection.classList.remove("hidden");
   </script>
 </body>
 </html>
