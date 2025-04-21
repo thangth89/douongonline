@@ -5,6 +5,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tài Chính Online</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+  <style>
+    /* Tạo nhãn TOP #1 bằng ::before */
+    .card-with-top-label::before {
+      content: "TOP #1";
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: #e32219;
+      color: white;
+      padding: 2px 8px;
+      font-size: 12px;
+      font-weight: bold;
+      z-index: 1;
+      border-bottom-right-radius: 8px;
+    }
+    
+    /* Tạo nhãn NEW bằng ::after */
+    .card-with-new-label::after {
+      content: "NEW";
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color: #e32219;
+      color: white;
+      padding: 2px 8px;
+      font-size: 12px;
+      font-weight: bold;
+      z-index: 1;
+      border-bottom-left-radius: 8px;
+    }
+    
+    .bg-white.rounded-lg {
+      overflow: hidden;
+    }
+  </style>
   <script>
     function toggleMenu() {
       const menu = document.getElementById('nav-menu');
@@ -13,7 +48,7 @@
   </script>
 </head>
 <body class="bg-green-50">
-  <header class="bg-white p-4 text-green-800 shadow-md flex justify-between items-center flex-wrap">
+  <header class="bg-white p-4 text-green-800 shadow-md flex justify-between items-center flex-wrap fixed top-0 left-0 right-0 z-10">
     <h1 class="text-lg font-bold">TAICHINH8386.ONLINE</h1>
     <button class="md:hidden" onclick="toggleMenu()">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -26,8 +61,10 @@
       <a href="#" id="menu-huongdan" class="block md:inline-block px-3 py-2 rounded-md font-bold text-green-700 hover:text-green-900">Hướng dẫn</a>
     </nav>
   </header>
+  <!-- Thêm một phần tử div để dành chỗ cho header cố định -->
+  <div class="pt-20"></div>
 
-  <section class="mt-20 px-4 py-6 bg-green-100 text-green-900 text-center">
+  <section class="px-4 py-6 bg-green-100 text-green-900 text-center">
     <h2 class="text-2xl md:text-3xl font-bold text-green-700">VAY TIỀN ONLINE NHANH 24/7<br>CHỈ CẦN CMND</h2>
     <p class="mt-4">✔ Vay tiền online 24/7 tại nhà với thủ tục đơn giản.</p>
     <p>✔ Lãi suất 0% cho khoản vay đầu.</p>
@@ -39,7 +76,8 @@
   <section class="px-4 py-6" id="vay-section">
     <h2 class="text-xl font-bold text-center text-green-700 mb-4">TOP 3 VAY TIỀN ONLINE</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-      <div class="bg-white p-4 rounded-lg shadow border border-green-100">
+      <!-- Card 1 với TOP #1 và NEW -->
+      <div class="bg-white p-4 rounded-lg shadow border border-green-100 relative card-with-top-label card-with-new-label">
         <img src="https://linklogo.com/jeffapp.png" class="w-24 mx-auto my-2">
         <h3 class="text-lg font-semibold text-center text-green-700">Jeff App</h3>
         <p class="text-center text-sm text-green-600 font-medium">📌 DUYỆT VAY NHANH</p>
@@ -53,7 +91,8 @@
         </ul>
         <button class="w-full mt-4 bg-green-600 text-white font-semibold py-2 rounded hover:bg-green-700 transition">ĐĂNG KÝ VAY</button>
       </div>
-      <div class="bg-white p-4 rounded-lg shadow border border-green-100">
+      <!-- Card 2 với TOP #1 và NEW -->
+      <div class="bg-white p-4 rounded-lg shadow border border-green-100 relative card-with-top-label card-with-new-label">
         <img src="https://linklogo.com/jeffapp.png" class="w-24 mx-auto my-2">
         <h3 class="text-lg font-semibold text-center text-green-700">Jeff App</h3>
         <p class="text-center text-sm text-green-600 font-medium">📌 DUYỆT VAY NHANH</p>
@@ -67,7 +106,8 @@
         </ul>
         <button class="w-full mt-4 bg-green-600 text-white font-semibold py-2 rounded hover:bg-green-700 transition">ĐĂNG KÝ VAY</button>
       </div>
-      <div class="bg-white p-4 rounded-lg shadow border border-green-100">
+      <!-- Card 3 với TOP #1 và NEW -->
+      <div class="bg-white p-4 rounded-lg shadow border border-green-100 relative card-with-top-label card-with-new-label">
         <img src="https://linklogo.com/jeffapp.png" class="w-24 mx-auto my-2">
         <h3 class="text-lg font-semibold text-center text-green-700">Jeff App</h3>
         <p class="text-center text-sm text-green-600 font-medium">📌 DUYỆT VAY NHANH</p>
@@ -81,7 +121,8 @@
         </ul>
         <button class="w-full mt-4 bg-green-600 text-white font-semibold py-2 rounded hover:bg-green-700 transition">ĐĂNG KÝ VAY</button>
       </div>
-      <div class="bg-white p-4 rounded-lg shadow border border-green-100">
+      <!-- Card 4 với TOP #1 và NEW -->
+      <div class="bg-white p-4 rounded-lg shadow border border-green-100 relative card-with-top-label card-with-new-label">
         <img src="https://linklogo.com/jeffapp.png" class="w-24 mx-auto my-2">
         <h3 class="text-lg font-semibold text-center text-green-700">Jeff App</h3>
         <p class="text-center text-sm text-green-600 font-medium">📌 DUYỆT VAY NHANH</p>
@@ -101,7 +142,8 @@
   <section class="px-4 py-6 hidden" id="the-section">
     <h2 class="text-xl font-bold text-center text-green-700 mb-4">CÁC ĐƠN VỊ PHÁT HÀNH THẺ</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-      <div class="bg-white p-4 rounded-lg shadow border border-green-100">
+      <!-- Các card tương tự như trên, có thể thêm nhãn nếu cần -->
+      <div class="bg-white p-4 rounded-lg shadow border border-green-100 relative card-with-top-label card-with-new-label">
         <img src="https://linklogo.com/jeffapp.png" class="w-24 mx-auto my-2">
         <h3 class="text-lg font-semibold text-center text-green-700">Jeff App</h3>
         <p class="text-center text-sm text-green-600 font-medium">📌 DUYỆT VAY NHANH</p>
@@ -115,7 +157,7 @@
         </ul>
         <button class="w-full mt-4 bg-green-600 text-white font-semibold py-2 rounded hover:bg-green-700 transition">ĐĂNG KÝ VAY</button>
       </div>
-      <div class="bg-white p-4 rounded-lg shadow border border-green-100">
+      <div class="bg-white p-4 rounded-lg shadow border border-green-100 relative card-with-top-label card-with-new-label">
         <img src="https://linklogo.com/jeffapp.png" class="w-24 mx-auto my-2">
         <h3 class="text-lg font-semibold text-center text-green-700">Jeff App</h3>
         <p class="text-center text-sm text-green-600 font-medium">📌 DUYỆT VAY NHANH</p>
@@ -129,7 +171,7 @@
         </ul>
         <button class="w-full mt-4 bg-green-600 text-white font-semibold py-2 rounded hover:bg-green-700 transition">ĐĂNG KÝ VAY</button>
       </div>
-      <div class="bg-white p-4 rounded-lg shadow border border-green-100">
+      <div class="bg-white p-4 rounded-lg shadow border border-green-100 relative card-with-top-label card-with-new-label">
         <img src="https://linklogo.com/jeffapp.png" class="w-24 mx-auto my-2">
         <h3 class="text-lg font-semibold text-center text-green-700">Jeff App</h3>
         <p class="text-center text-sm text-green-600 font-medium">📌 DUYỆT VAY NHANH</p>
@@ -143,7 +185,7 @@
         </ul>
         <button class="w-full mt-4 bg-green-600 text-white font-semibold py-2 rounded hover:bg-green-700 transition">ĐĂNG KÝ VAY</button>
       </div>
-      <div class="bg-white p-4 rounded-lg shadow border border-green-100">
+      <div class="bg-white p-4 rounded-lg shadow border border-green-100 relative card-with-top-label card-with-new-label">
         <img src="https://linklogo.com/jeffapp.png" class="w-24 mx-auto my-2">
         <h3 class="text-lg font-semibold text-center text-green-700">Jeff App</h3>
         <p class="text-center text-sm text-green-600 font-medium">📌 DUYỆT VAY NHANH</p>
@@ -157,7 +199,35 @@
         </ul>
         <button class="w-full mt-4 bg-green-600 text-white font-semibold py-2 rounded hover:bg-green-700 transition">ĐĂNG KÝ VAY</button>
       </div>
-      <!-- Các thẻ tương tự như phần vay -->
+      <div class="bg-white p-4 rounded-lg shadow border border-green-100 relative card-with-top-label card-with-new-label">
+        <img src="https://linklogo.com/jeffapp.png" class="w-24 mx-auto my-2">
+        <h3 class="text-lg font-semibold text-center text-green-700">Jeff App</h3>
+        <p class="text-center text-sm text-green-600 font-medium">📌 DUYỆT VAY NHANH</p>
+        <p class="text-center text-lg font-bold text-green-700">1 – 30 triệu</p>
+        <ul class="text-sm mt-2 list-disc list-inside text-green-800">
+          <li>Thời hạn vay: 3 – 12 tháng.</li>
+          <li>Lãi suất: <strong>0%</strong> khoản vay đầu.</li>
+          <li>Trả góp từng tháng hoặc cuối kỳ.</li>
+          <li>22 tuổi trở lên.</li>
+          <li>Hồ sơ chỉ cần CMND.</li>
+        </ul>
+        <button class="w-full mt-4 bg-green-600 text-white font-semibold py-2 rounded hover:bg-green-700 transition">ĐĂNG KÝ VAY</button>
+      </div>
+      <div class="bg-white p-4 rounded-lg shadow border border-green-100 relative card-with-top-label card-with-new-label">
+        <img src="https://linklogo.com/jeffapp.png" class="w-24 mx-auto my-2">
+        <h3 class="text-lg font-semibold text-center text-green-700">Jeff App</h3>
+        <p class="text-center text-sm text-green-600 font-medium">📌 DUYỆT VAY NHANH</p>
+        <p class="text-center text-lg font-bold text-green-700">1 – 30 triệu</p>
+        <ul class="text-sm mt-2 list-disc list-inside text-green-800">
+          <li>Thời hạn vay: 3 – 12 tháng.</li>
+          <li>Lãi suất: <strong>0%</strong> khoản vay đầu.</li>
+          <li>Trả góp từng tháng hoặc cuối kỳ.</li>
+          <li>22 tuổi trở lên.</li>
+          <li>Hồ sơ chỉ cần CMND.</li>
+        </ul>
+        <button class="w-full mt-4 bg-green-600 text-white font-semibold py-2 rounded hover:bg-green-700 transition">ĐĂNG KÝ VAY</button>
+      </div>
+      <!-- Các card khác tương tự -->
     </div>
   </section>
 
