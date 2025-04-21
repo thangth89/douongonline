@@ -119,73 +119,21 @@
       cursor: pointer;
     }
     @media (max-width: 768px) {
-  .hero {
-    flex-direction: column;
-    padding: 20px 16px;
-    gap: 20px;
-    align-items: flex-start;
-  }
-
-  .hero-text {
-    text-align: left;
-    width: 100%;
-  }
-
-  .hero-section {
-    padding: 20px;
-  }
-
-  .hero-text h2 {
-    font-size: 18px;
-    line-height: 1.4;
-    font-weight: 700;
-    text-transform: uppercase;
-    word-break: break-word;
-    margin-bottom: 10px;
-  }
-
-  .hero-text p {
-    font-size: 15px;
-    line-height: 1.6;
-    margin-bottom: 8px;
-  }
-
-  .hero-text li {
-    font-size: 15px;
-    line-height: 1.6;
-    margin-bottom: 6px;
-    list-style: none;
-  }
-
-  .hero-text ul {
-    padding-left: 0;
-  }
-
-  .hero-text li::before {
-    content: "✔️ ";
-    color: green;
-  }
-
-  .hero-img {
-    width: 100%;
-  }
-
-  .hero-img img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-  }
-
-  header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  nav {
-    margin-top: 8px;
-  }
-}
+      .hero {
+        flex-direction: column;
+        text-align: center;
+      }
+      .hero-text, .hero-img {
+        max-width: 100%;
+      }
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav {
+        margin-top: 8px;
+      }
+    }
     .products-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -205,18 +153,17 @@
     <nav>
       <a href="#" id="menu-vay" class="active">Vay tiền</a>
       <a href="#" id="menu-the">Thẻ tín dụng</a>
+      <a href="#" id="menu-huongdan">Hướng dẫn</a>
     </nav>
   </header>
 
   <section class="hero">
     <div class="hero-text">
-      <h2>VAY TIỀN ONLINE NHANH 24/7 – CHỈ CẦN CMND</h2>
-      <ul>
-        <li>Vay tiền online 24/7 tại nhà với thủ tục đơn giản.</li>
-        <li>Lãi suất 0% cho khoản vay đầu.</li>
-        <li>Hỗ trợ hạn mức vay từ 1 triệu – 500 triệu chỉ cần CMND.</li>
-        <li>Không gọi thẩm định người thân.</li>
-      </ul>
+      <h2>VAY TIỀN ONLINE NHANH 24/7<br>CHỈ CẦN CMND</h2>
+      <p>✔ Vay tiền online 24/7 tại nhà với thủ tục đơn giản.</p>
+      <p>✔ Lãi suất 0% cho khoản vay đầu.</p>
+      <p>✔ Hỗ trợ hạn mức vay từ 1 triệu – 500 triệu chỉ cần CMND</p>
+      <p>✔ Không gọi thẩm định người thân.</p>
     </div>
     <div class="hero-img">
       <img src="db0f5a1f-8c4e-478e-a434-cb8c6829faf7.png" alt="minh họa" />
@@ -423,27 +370,56 @@
     </div>
     </div>
   </section>
-
+  <section class="section hidden" id="huongdan-section">
+    <h2 class="section-title">HƯỚNG DẪN SỬ DỤNG</h2>
+    <div class="card">
+      <h3>📌 Hướng dẫn vay tiền</h3>
+      <p>1. Chọn gói vay phù hợp trong mục "Vay tiền".</p>
+      <p>2. Nhấn "Đăng ký vay", điền thông tin cá nhân.</p>
+      <p>3. Đợi phê duyệt và nhận tiền về tài khoản.</p>
+    </div>
+    <div class="card" style="margin-top: 20px;">
+      <h3>📌 Hướng dẫn mở thẻ tín dụng</h3>
+      <p>1. Vào mục "Thẻ tín dụng" và chọn đơn vị phát hành.</p>
+      <p>2. Nhấn "Đăng ký vay" để mở form đăng ký thẻ.</p>
+      <p>3. Điền thông tin theo hướng dẫn và chờ xét duyệt.</p>
+    </div>
+  </section>
   <script>
     const menuVay = document.getElementById("menu-vay");
     const menuThe = document.getElementById("menu-the");
     const vaySection = document.getElementById("vay-section");
     const theSection = document.getElementById("the-section");
+    const menuHuongDan = document.getElementById("menu-huongdan");
+    const huongDanSection = document.getElementById("huongdan-section");
 
     menuVay.addEventListener("click", (e) => {
       e.preventDefault();
       menuVay.classList.add("active");
       menuThe.classList.remove("active");
+      menuHuongDan.classList.remove("active")
       vaySection.classList.remove("hidden");
       theSection.classList.add("hidden");
+      huongDanSection.classList.add("hidden");
     });
 
     menuThe.addEventListener("click", (e) => {
       e.preventDefault();
       menuVay.classList.remove("active");
       menuThe.classList.add("active");
+      menuHuongDan.classList.remove("active")
       vaySection.classList.add("hidden");
       theSection.classList.remove("hidden");
+      huongDanSection.classList.add("hidden");
+    });
+    menuHuongDan.addEventListener("click", (e) => {
+      e.preventDefault();
+      menuVay.classList.remove("active");
+      menuThe.classList.remove("active");
+      menuHuongDan.classList.add("active");
+      vaySection.classList.add("hidden");
+      theSection.classList.add("hidden");
+      huongDanSection.classList.remove("hidden");
     });
   </script>
 </body>
