@@ -41,6 +41,10 @@
     .bg-white.rounded-lg {
       overflow: hidden;
     }
+    #main-content {
+    scroll-margin-top: 80px; /* tương ứng với pt-20 */
+    }
+
   </style>
   <script>
     function toggleMenu() {
@@ -74,6 +78,9 @@
 
   <!-- Thêm một phần tử div để dành chỗ cho header cố định -->
   <div class="pt-20"></div>
+
+  <!-- Thêm một thẻ "mốc cuộn" -->
+  <div id="main-content"></div>
 
   <!-- Thêm id="intro-section" và mặc định ẩn với class="hidden" -->
   <section id="intro-section" class="px-4 py-6 bg-green-100 text-green-900 text-center hidden">
@@ -259,6 +266,7 @@
     const theSection = document.getElementById("the-section");
     const huongDanSection = document.getElementById("huongdan-section");
     const introSection = document.getElementById("intro-section"); // Thêm tham chiếu đến intro-section
+    const mainContent = document.getElementById("main-content"); // Thêm tham chiếu đến mốc cuộn
 
     function setActive(menu) {
       menuVay.classList.remove("text-green-900", "underline");
@@ -275,7 +283,7 @@
       huongDanSection.classList.add("hidden");
       introSection.classList.add("hidden"); // Ẩn phần giới thiệu khi chọn Vay tiền
       closeMenu();
-      vaySection.scrollIntoView({ behavior: "smooth" }); // Cuộn lên đầu phần Vay
+      mainContent.scrollIntoView({ behavior: "smooth" }); // Cuộn đến mốc an toàn
     });
 
     menuThe.addEventListener("click", (e) => {
@@ -286,7 +294,7 @@
       huongDanSection.classList.add("hidden");
       introSection.classList.add("hidden"); // Ẩn phần giới thiệu khi chọn Thẻ tín dụng
       closeMenu();
-      theSection.scrollIntoView({ behavior: "smooth" }); // Cuộn lên đầu phần Thẻ
+      mainContent.scrollIntoView({ behavior: "smooth" }); // Cuộn đến mốc an toàn
     });
 
     menuHuongDan.addEventListener("click", (e) => {
@@ -297,7 +305,7 @@
       huongDanSection.classList.remove("hidden");
       introSection.classList.remove("hidden"); // Hiển thị phần giới thiệu khi chọn Hướng dẫn
       closeMenu();
-      huongDanSection.scrollIntoView({ behavior: "smooth" }); // Cuộn lên đầu phần Hướng dẫn
+      mainContent.scrollIntoView({ behavior: "smooth" }); // Cuộn đến mốc an toàn
     });
     
     // Thiết lập ban đầu - vì mặc định đang ở tab Vay tiền nên ẩn phần giới thiệu
