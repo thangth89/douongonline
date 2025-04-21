@@ -383,6 +383,7 @@
     menuVay.addEventListener("click", (e) => {
       e.preventDefault();
       setActive(menuVay);
+      localStorage.setItem("selectedTab", "vay");
       vaySection.classList.remove("hidden");
       theSection.classList.add("hidden");
       huongDanSection.classList.add("hidden");
@@ -394,6 +395,7 @@
     menuThe.addEventListener("click", (e) => {
       e.preventDefault();
       setActive(menuThe);
+      localStorage.setItem("selectedTab", "the");
       vaySection.classList.add("hidden");
       theSection.classList.remove("hidden");
       huongDanSection.classList.add("hidden");
@@ -405,6 +407,7 @@
     menuHuongDan.addEventListener("click", (e) => {
       e.preventDefault();
       setActive(menuHuongDan);
+      localStorage.setItem("selectedTab", "huongdan");
       vaySection.classList.add("hidden");
       theSection.classList.add("hidden");
       huongDanSection.classList.remove("hidden");
@@ -413,15 +416,29 @@
       mainContent.scrollIntoView({ behavior: "smooth" }); // Cuộn đến mốc an toàn
     });
     
-    // Thiết lập trạng thái ban đầu theo tab active
     document.addEventListener("DOMContentLoaded", function() {
-      // Vì tab Hướng dẫn đang được active mặc định (có class text-green-900 underline)
-      // nên hiển thị các section tương ứng và ẩn các section khác
-      vaySection.classList.add("hidden");
-      theSection.classList.add("hidden");
-      huongDanSection.classList.remove("hidden");
-      introSection.classList.remove("hidden");
-    });
+    const selectedTab = localStorage.getItem("selectedTab") || "huongdan";
+
+    if (selectedTab === "vay") {
+    setActive(menuVay);
+    vaySection.classList.remove("hidden");
+    theSection.classList.add("hidden");
+    huongDanSection.classList.add("hidden");
+    introSection.classList.add("hidden");
+    } else if (selectedTab === "the") {
+    setActive(menuThe);
+    vaySection.classList.add("hidden");
+    theSection.classList.remove("hidden");
+    huongDanSection.classList.add("hidden");
+    introSection.classList.add("hidden");
+    } else {
+    setActive(menuHuongDan);
+    vaySection.classList.add("hidden");
+    theSection.classList.add("hidden");
+    huongDanSection.classList.remove("hidden");
+    introSection.classList.remove("hidden");
+    }
+   });
   </script>
 
 <!-- Thêm thư viện CountUp.js từ CDN -->
