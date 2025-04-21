@@ -45,8 +45,39 @@
     #main-content {
     scroll-margin-top: 80px; /* tương ứng với pt-20 */
     }
+   /* Tạo thông báo khi chuột di chuyển vào nút đăng ký trên máy tính */
+  .tooltip-btn {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
+  .tooltip-btn .tooltiptext {
+    visibility: hidden;
+    background-color: #ffeb3b;
+    color: #000;
+    text-align: center;
+    padding: 6px 12px;
+    border-radius: 6px;
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 13px;
+    line-height: 1.4;
+    white-space: nowrap;
+  }
+
+  .tooltip-btn:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
   </style>
+
   <script>
     function toggleMenu() {
       const menu = document.getElementById('nav-menu');
@@ -130,9 +161,16 @@
           <li>22 tuổi trở lên.</li>
           <li>Hồ sơ chỉ cần CMND.</li>
         </ul>
-	<a href="https://di.trackingtik.com/click?a=11826&amp;o=161" rel="nofollow sponsored" target="_blank">
-        <button class="w-full mt-4 bg-green-600 text-white font-semibold py-2 rounded hover:bg-green-700 transition">ĐĂNG KÝ VAY</button>
-	</a>
+	<div class="tooltip-btn w-full mt-4">
+         <a href="https://di.trackingtik.com/click?a=11826&amp;o=161"
+          rel="nofollow sponsored"
+     	  target="_blank">
+         <button class="bg-green-600 text-white font-semibold py-2 px-4 w-full rounded hover:bg-green-700 transition">
+           ĐĂNG KÝ VAY
+      	 </button>
+  	 </a>
+  	 <div class="tooltiptext">Chuyển đến Jeff App để đăng ký vay</div>
+	</div>
       </div>
     </div>
   </section>   
@@ -416,29 +454,46 @@
       mainContent.scrollIntoView({ behavior: "smooth" }); // Cuộn đến mốc an toàn
     });
     
-    document.addEventListener("DOMContentLoaded", function() {
-    const selectedTab = localStorage.getItem("selectedTab") || "huongdan";
+   // Kiểm soát menu 
+  // Thêm biến để theo dõi nếu đang tải lại trang
+let isPageRefresh = true;
 
-    if (selectedTab === "vay") {
+// Thêm event listener cho sự kiện pageshow để kiểm tra nếu đang quay lại trang
+window.addEventListener('pageshow', function(event) {
+  // Nếu đang quay lại từ cache (sử dụng nút back)
+  if (event.persisted) {
+    isPageRefresh = false;
+  }
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+  // Nếu là tải lại trang hoàn toàn (không phải từ nút back), luôn đặt về "huongdan"
+  if (isPageRefresh) {
+    localStorage.setItem("selectedTab", "huongdan");
+  }
+  
+  const selectedTab = localStorage.getItem("selectedTab") || "huongdan";
+
+  if (selectedTab === "vay") {
     setActive(menuVay);
     vaySection.classList.remove("hidden");
     theSection.classList.add("hidden");
     huongDanSection.classList.add("hidden");
     introSection.classList.add("hidden");
-    } else if (selectedTab === "the") {
+  } else if (selectedTab === "the") {
     setActive(menuThe);
     vaySection.classList.add("hidden");
     theSection.classList.remove("hidden");
     huongDanSection.classList.add("hidden");
     introSection.classList.add("hidden");
-    } else {
+  } else {
     setActive(menuHuongDan);
     vaySection.classList.add("hidden");
     theSection.classList.add("hidden");
     huongDanSection.classList.remove("hidden");
     introSection.classList.remove("hidden");
-    }
-   });
+  }
+});
   </script>
 
 <!-- Thêm thư viện CountUp.js từ CDN -->
