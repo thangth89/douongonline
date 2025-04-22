@@ -136,52 +136,14 @@
 
   <section class="px-4 py-6 hidden" id="vay-section">
     <h2 class="text-xl font-bold text-center text-green-700 mb-4">TOP 3 VAY TIỀN ONLINE</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+    <div id="vay-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
       <!-- Card 1 với TOP #1 và NEW -->
-      <div class="bg-white p-4 rounded-lg shadow border border-green-100 relative card-with-top-label card-with-new-label">
-        <img loading="lazy" src="https://linklogo.com/jeffapp.png" class="w-24 mx-auto my-2">
-        <h3 class="text-lg font-semibold text-center text-green-700">Jeff App</h3>
-        <p class="text-center text-sm text-green-600 font-medium">📌 DUYỆT VAY NHANH</p>
-        <p class="text-center text-lg font-bold text-green-700">1 – 30 triệu</p>
-        <ul class="text-sm mt-2 list-disc list-inside text-green-800">
-          <li>Thời hạn vay: 3 – 12 tháng.</li>
-          <li>Lãi suất: <strong>0%</strong> khoản vay đầu.</li>
-          <li>Trả góp từng tháng hoặc cuối kỳ.</li>
-          <li>22 tuổi trở lên.</li>
-          <li>Hồ sơ chỉ cần CMND.</li>
-        </ul>
-	<div class="tooltip-btn w-full mt-4">
-         <a href="https://di.trackingtik.com/click?a=11826&amp;o=161"
-          rel="nofollow sponsored"
-     	  target="_blank">
-         <button class="bg-green-600 text-white font-semibold py-2 px-4 w-full rounded hover:bg-green-700 transition">
-           ĐĂNG KÝ VAY
-      	 </button>
-  	 </a>
-  	 <div class="tooltiptext">Chuyển đến Jeff App để đăng ký vay</div>
-	</div>
-      </div>
     </div>
   </section>   
   <section class="px-4 py-6 hidden" id="the-section">
     <h2 class="text-xl font-bold text-center text-green-700 mb-4">CÁC ĐƠN VỊ PHÁT HÀNH THẺ</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+    <div id="the-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
       <!-- Các card 1 tương tự như trên, có thể thêm nhãn nếu cần -->
-      <div class="bg-white p-4 rounded-lg shadow border border-green-100 relative card-with-top-label card-with-new-label">
-        <img loading="lazy" src="https://linklogo.com/jeffapp.png" class="w-24 mx-auto my-2">
-        <h3 class="text-lg font-semibold text-center text-green-700">MB Bank</h3>
-        <p class="text-center text-sm text-green-600 font-medium">📌 DUYỆT VAY NHANH</p>
-        <p class="text-center text-lg font-bold text-green-700">1 – 30 triệu</p>
-        <ul class="text-sm mt-2 list-disc list-inside text-green-800">
-          <li>Thời hạn vay: 3 – 12 tháng.</li>
-          <li>Lãi suất: <strong>0%</strong> khoản vay đầu.</li>
-          <li>Trả góp từng tháng hoặc cuối kỳ.</li>
-          <li>22 tuổi trở lên.</li>
-          <li>Hồ sơ chỉ cần CMND.</li>
-        </ul>
-        <button class="w-full mt-4 bg-green-600 text-white font-semibold py-2 rounded hover:bg-green-700 transition">ĐĂNG KÝ VAY</button>
-      </div>
-      <!-- Các card khác tương tự -->
     </div>
   </section>
 
@@ -509,5 +471,27 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 </script>
+
+
+<!-- Script xử lý load sản phẩm -->
+<script>
+    async function loadCardsFromJson(containerId, folder) {
+      const container = document.getElementById(containerId);
+      const res = await fetch(`sanpham/files.json`);
+      const list = await res.json();
+      const files = list[folder] || [];
+
+      for (const file of files) {
+        const htmlRes = await fetch(`sanpham/${folder}/${file}`);
+        const html = await htmlRes.text();
+        container.innerHTML += html;
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      loadCardsFromJson("vay-container", "vay");
+      loadCardsFromJson("the-container", "the");
+    });
+  </script>
 </body>
 </html>
