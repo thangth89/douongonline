@@ -599,26 +599,32 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 
 
-<!-- Script xử lý load sản phẩm -->
 <script>
-    async function loadCardsFromJson(containerId, folder) {
-      const container = document.getElementById(containerId);
-      const res = await fetch(`sanpham/files.json`);
-      const list = await res.json();
-      const files = list[folder] || [];
+  // Hàm preload files.json và load thẻ sản phẩm từ folder tương ứng
+  async function loadCardsFromList(containerId, files, folder) {
+    const container = document.getElementById(containerId);
 
-      for (const file of files) {
-        const htmlRes = await fetch(`sanpham/${folder}/${file}`);
-        const html = await htmlRes.text();
-        container.innerHTML += html;
-      }
+    for (const file of files) {
+      const htmlRes = await fetch(`sanpham/${folder}/${file}`);
+      let html = await htmlRes.text();
+
+      // Chỉ thêm loading="lazy" nếu chưa có sẵn
+      html = html.replace(/<img(?![^>]*loading=)([^>]*?)src=/g, '<img loading="lazy"$1src=');
+
+      container.insertAdjacentHTML("beforeend", html);
     }
+  }
 
-    document.addEventListener("DOMContentLoaded", () => {
-      loadCardsFromJson("vay-container", "vay");
-      loadCardsFromJson("the-container", "the");
-    });
-  </script>
+  // Khi trang tải xong, thực hiện preload và gọi 2 folder: vay, the
+  document.addEventListener("DOMContentLoaded", async () => {
+    const res = await fetch("sanpham/files.json");
+    const list = await res.json();
+
+    await loadCardsFromList("vay-container", list["vay"] || [], "vay");
+    await loadCardsFromList("the-container", list["the"] || [], "the");
+  });
+</script>
+
 
 <!-- Thông báo đăng ký thành công -->
 <div id="notification-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;"></div>
