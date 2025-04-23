@@ -673,24 +673,25 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const noti = document.createElement('div');
     noti.className = 'notification';
-    noti.innerHTML = \`
-      <img loading="lazy" src="\${anh}" />
-      <span>\${ten} - \${sdt} đã đăng ký thành công</span>
-    \`;
+    noti.innerHTML = `
+  <img loading="lazy" src="${anh}" />
+  <span>${ten} - ${sdt} đã đăng ký thành công</span>
+`;
 
     container.appendChild(noti);
 
     setTimeout(() => {
       noti.remove();
-    }, 3000);
+    }, 10000);
   }
 
-  // Hiển thị thông báo mỗi 2 phút
+  // Hiển thị thông báo mỗi 1 phút
   setInterval(hienThongBao, 60000);
 
   // Hiển thị ngay thông báo đầu tiên khi vào trang
-  window.addEventListener('DOMContentLoaded', hienThongBao);
-
+  window.addEventListener('DOMContentLoaded', () => {
+  setTimeout(hienThongBao, 15000); // 15000 ms = 15 giây
+  });
 </script>
 
 </body>
