@@ -619,5 +619,79 @@ document.addEventListener("DOMContentLoaded", function() {
       loadCardsFromJson("the-container", "the");
     });
   </script>
+
+<!-- Thông báo đăng ký thành công -->
+<div id="notification-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;"></div>
+
+<style>
+  .notification {
+    background-color: #fff8c4;
+    color: #000;
+    padding: 12px 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    animation: slideIn 0.5s ease, fadeOut 0.5s ease 2.5s forwards;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .notification img {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+  }
+
+  @keyframes slideIn {
+    from {opacity: 0; transform: translateX(100%);}
+    to {opacity: 1; transform: translateX(0);}
+  }
+
+  @keyframes fadeOut {
+    to {opacity: 0; transform: translateX(100%);}
+  }
+</style>
+
+<script>
+  const tenKhach = ["Nguyễn Phi Hùng", "Trịnh Thị Lan", "Nguyễn Quốc Huy", "Phạm Thu Hằng", "Đào Công Phúc", "Bùi Bích Huệ"];
+  const soDienThoai = ["098*****12", "090*****45", "097*****89", "093*****33", "091*****77", "088*****66"];
+  const hinhAnh = [
+    "images/jeff.png",
+    "images/vayvnd.png",
+    "images/hsbc.png",
+    "images/meocat.png",
+    "images/cayvang.png"
+  ];
+
+  function hienThongBao() {
+    const container = document.getElementById('notification-container');
+    const ten = tenKhach[Math.floor(Math.random() * tenKhach.length)];
+    const sdt = soDienThoai[Math.floor(Math.random() * soDienThoai.length)];
+    const anh = hinhAnh[Math.floor(Math.random() * hinhAnh.length)];
+
+    const noti = document.createElement('div');
+    noti.className = 'notification';
+    noti.innerHTML = \`
+      <img loading="lazy" src="\${anh}" />
+      <span>\${ten} - \${sdt} đã đăng ký thành công</span>
+    \`;
+
+    container.appendChild(noti);
+
+    setTimeout(() => {
+      noti.remove();
+    }, 3000);
+  }
+
+  // Hiển thị thông báo mỗi 2 phút
+  setInterval(hienThongBao, 120000);
+
+  // Hiển thị ngay thông báo đầu tiên khi vào trang
+  window.addEventListener('DOMContentLoaded', hienThongBao);
+
+</script>
+
 </body>
 </html>
