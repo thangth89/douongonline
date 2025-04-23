@@ -689,9 +689,8 @@ document.addEventListener("DOMContentLoaded", function() {
   setInterval(hienThongBao, 60000);
 
   // Hiển thị ngay thông báo đầu tiên khi vào trang
-  window.addEventListener('DOMContentLoaded', () => {
-  setTimeout(hienThongBao, 15000); // 15000 ms = 15 giây
-  });
+  window.addEventListener('DOMContentLoaded', hienThongBao);
+
 </script>
 
 </body>
