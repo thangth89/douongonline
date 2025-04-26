@@ -245,10 +245,7 @@
     </nav>
   </div>
 </header>
-
-  <!-- Thêm một phần tử div để dành chỗ cho header cố định -->
-  <div class="pt-40"></div>
-
+  <div id="header-placeholder"></div>
   <!-- Thêm một thẻ "mốc cuộn" -->
   <div id="main-content"></div>
 
@@ -836,6 +833,20 @@ document.addEventListener("DOMContentLoaded", function() {
   setTimeout(hienThongBao, 15000); // 15000 ms = 15 giây
   });
 
+</script>
+
+<script>
+  function updatePlaceholderHeight() {
+    const header = document.querySelector('header');
+    const placeholder = document.getElementById('header-placeholder');
+    if (header && placeholder) {
+      const headerHeight = header.offsetHeight;
+      placeholder.style.height = (headerHeight + 16) + 'px'; // Header height + khoảng đệm 16px
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', updatePlaceholderHeight);
+  window.addEventListener('resize', updatePlaceholderHeight); // Khi thay đổi kích thước cửa sổ
 </script>
 
 </body>
