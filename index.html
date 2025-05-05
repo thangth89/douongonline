@@ -202,6 +202,35 @@
     visibility: visible;
     opacity: 1;
   }
+
+  .menu {
+   display: flex;
+   flex-wrap: nowrap;           /* Không cho xuống dòng */
+   justify-content: space-between;
+   align-items: center;
+   overflow-x: auto;            /* Cho phép cuộn ngang nếu chật */
+   white-space: nowrap;         /* Không ngắt dòng chữ */
+   padding: 0;
+   margin: 0;
+  }
+  .menu li {
+    list-style: none;
+    padding: 8px 10px;
+    flex-shrink: 1;              /* Cho phép co lại nếu cần */
+  }
+  .menu a {
+    text-decoration: none;
+    color: #000;
+    font-size: 14px;
+    white-space: nowrap;         /* Không ngắt dòng trong thẻ a */
+  }
+
+  @media (max-width: 600px) {
+  .menu a {
+    font-size: 13px;       /* Hoặc 12px nếu cần nhỏ hơn nữa */
+    padding: 6px 8px;
+   }
+  }
   </style>
 
   <script>
