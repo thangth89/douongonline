@@ -204,33 +204,33 @@
   }
 
   .menu {
-   display: flex;
-   flex-wrap: nowrap;           /* Không cho xuống dòng */
-   justify-content: space-between;
-   align-items: center;
-   overflow-x: auto;            /* Cho phép cuộn ngang nếu chật */
-   white-space: nowrap;         /* Không ngắt dòng chữ */
-   padding: 0;
-   margin: 0;
-  }
-  .menu li {
-    list-style: none;
-    padding: 8px 10px;
-    flex-shrink: 1;              /* Cho phép co lại nếu cần */
-  }
-  .menu a {
-    text-decoration: none;
-    color: #000;
-    font-size: 14px;
-    white-space: nowrap;         /* Không ngắt dòng trong thẻ a */
-  }
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  padding: 0 10px;
+  gap: 10px; /* tạo khoảng cách giữa các mục */
+}
 
-  @media (max-width: 600px) {
-  .menu a {
-    font-size: 10px;       /* Hoặc 12px nếu cần nhỏ hơn nữa */
-    padding: 6px 8px;
-   }
+.menu li {
+  flex: 0 0 auto;
+  list-style: none;
+}
+
+.menu a {
+  display: inline-block;
+  padding: 10px 12px;
+  text-decoration: none;
+  font-size: 15px;
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .menu {
+    font-size: 14px;
   }
+}
   </style>
 
   <script>
