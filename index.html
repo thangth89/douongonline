@@ -242,6 +242,7 @@
       <a href="#" id="menu-vay" class="block px-3 py-2 rounded-md font-bold text-green-700 hover:text-green-900">Vay tiền</a>
       <a href="#" id="menu-the" class="block px-3 py-2 rounded-md font-bold text-green-700 hover:text-green-900">Thẻ tín dụng</a>
       <a href="#" id="menu-huongdan" class="block px-3 py-2 rounded-md font-bold text-green-700 hover:text-green-900 underline">Hướng dẫn</a>
+      <a href="#" id="menu-tintuc" class="block px-3 py-2 rounded-md font-bold text-green-700 hover:text-green-900">Tin tức</a>
     </nav>
   </div>
 </header>
@@ -277,6 +278,14 @@
       <!-- Các card 1 tương tự như trên, có thể thêm nhãn nếu cần -->
     </div>
   </section>
+
+ <!-- Phần tin tuc -->
+ <section class="px-4 py-6 hidden" id="tintuc-section">
+  <h2 class="text-xl font-bold text-center text-green-700 mb-4">TIN TỨC MỚI NHẤT</h2>
+  <div id="tintuc-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <!-- Các bài viết tin tức sẽ load vào đây -->
+  </div>
+ </section>
 
   <section class="px-4 py-6 hidden" id="huongdan-section">
     <h2 class="text-xl font-bold text-center text-green-700 mb-4">MẸO HƯỚNG DẪN VAY TIỀN ONLINE NHANH VÀ MỞ THẺ TÍN DỤNG ONLINE MIỄN PHÍ</h2>
@@ -403,6 +412,7 @@
   </div>
     </details>
   </section>
+
 
  <!-- Phần "Những con số biết nói" với responsive tối ưu -->
 <section class="counter-section py-8 md:py-16 text-white text-center" style="background-color: #f97316;">
@@ -613,9 +623,11 @@ fetch('faq.html')
     const menuVay = document.getElementById("menu-vay");
     const menuThe = document.getElementById("menu-the");
     const menuHuongDan = document.getElementById("menu-huongdan");
+    const menuTinTuc = document.getElementById("menu-tintuc");
     const vaySection = document.getElementById("vay-section");
     const theSection = document.getElementById("the-section");
     const huongDanSection = document.getElementById("huongdan-section");
+    const tinTucSection = document.getElementById("tintuc-section");
     const introSection = document.getElementById("intro-section"); // Thêm tham chiếu đến intro-section
     const mainContent = document.getElementById("main-content"); // Thêm tham chiếu đến mốc cuộn
 
@@ -623,6 +635,7 @@ fetch('faq.html')
       menuVay.classList.remove("text-green-900", "underline");
       menuThe.classList.remove("text-green-900", "underline");
       menuHuongDan.classList.remove("text-green-900", "underline");
+      menuTinTuc.classList.remove("text-green-900", "underline");
       menu.classList.add("text-green-900", "underline");
     }
 
@@ -633,6 +646,7 @@ fetch('faq.html')
       vaySection.classList.remove("hidden");
       theSection.classList.add("hidden");
       huongDanSection.classList.add("hidden");
+      tinTucSection.classList.add("hidden");
       introSection.classList.add("hidden"); // Ẩn phần giới thiệu khi chọn Vay tiền
       mainContent.scrollIntoView({ behavior: "smooth" }); // Cuộn đến mốc an toàn
     });
@@ -644,6 +658,7 @@ fetch('faq.html')
       vaySection.classList.add("hidden");
       theSection.classList.remove("hidden");
       huongDanSection.classList.add("hidden");
+      tinTucSection.classList.add("hidden");
       introSection.classList.add("hidden"); // Ẩn phần giới thiệu khi chọn Thẻ tín dụng
       mainContent.scrollIntoView({ behavior: "smooth" }); // Cuộn đến mốc an toàn
     });
@@ -655,8 +670,20 @@ fetch('faq.html')
       vaySection.classList.add("hidden");
       theSection.classList.add("hidden");
       huongDanSection.classList.remove("hidden");
+      tinTucSection.classList.add("hidden");
       introSection.classList.remove("hidden"); // Hiển thị phần giới thiệu khi chọn Hướng dẫn
       mainContent.scrollIntoView({ behavior: "smooth" }); // Cuộn đến mốc an toàn
+    });
+    menuTinTuc.addEventListener("click", (e) => {
+      e.preventDefault();
+      setActive(menuTinTuc);
+      localStorage.setItem("selectedTab", "tintuc");
+      vaySection.classList.add("hidden");
+      theSection.classList.add("hidden");
+      huongDanSection.classList.add("hidden");
+      tinTucSection.classList.remove("hidden");
+      introSection.classList.add("hidden");
+      mainContent.scrollIntoView({ behavior: "smooth" });
     });
     
    // Kiểm soát menu 
@@ -680,26 +707,36 @@ document.addEventListener("DOMContentLoaded", function() {
   const selectedTab = localStorage.getItem("selectedTab") || "huongdan";
 
   if (selectedTab === "vay") {
-    setActive(menuVay);
-    vaySection.classList.remove("hidden");
-    theSection.classList.add("hidden");
-    huongDanSection.classList.add("hidden");
-    introSection.classList.add("hidden");
-  } else if (selectedTab === "the") {
-    setActive(menuThe);
-    vaySection.classList.add("hidden");
-    theSection.classList.remove("hidden");
-    huongDanSection.classList.add("hidden");
-    introSection.classList.add("hidden");
-  } else {
-    setActive(menuHuongDan);
-    vaySection.classList.add("hidden");
-    theSection.classList.add("hidden");
-    huongDanSection.classList.remove("hidden");
-    introSection.classList.remove("hidden");
-  }
+  setActive(menuVay);
+  vaySection.classList.remove("hidden");
+  theSection.classList.add("hidden");
+  huongDanSection.classList.add("hidden");
+  tinTucSection.classList.add("hidden");
+  introSection.classList.add("hidden");
+   } else if (selectedTab === "the") {
+  setActive(menuThe);
+  vaySection.classList.add("hidden");
+  theSection.classList.remove("hidden");
+  huongDanSection.classList.add("hidden");
+  tinTucSection.classList.add("hidden");
+  introSection.classList.add("hidden");
+   } else if (selectedTab === "tintuc") {
+  setActive(menuTinTuc);
+  vaySection.classList.add("hidden");
+  theSection.classList.add("hidden");
+  huongDanSection.classList.add("hidden");
+  tinTucSection.classList.remove("hidden");
+  introSection.classList.add("hidden");
+   } else {
+  setActive(menuHuongDan);
+  vaySection.classList.add("hidden");
+  theSection.classList.add("hidden");
+  huongDanSection.classList.remove("hidden");
+  tinTucSection.classList.add("hidden");
+  introSection.classList.remove("hidden");
+   }
 });
-  </script>
+ </script>
 
 <!-- Thêm thư viện CountUp.js từ CDN -->
 <script src="https://cdn.jsdelivr.net/npm/countup.js@2.0.8/dist/countUp.umd.js"></script>
@@ -753,6 +790,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     await loadCardsFromList("vay-container", list["vay"] || [], "vay");
     await loadCardsFromList("the-container", list["the"] || [], "the");
+    await loadCardsFromList("tintuc-container", list["tintuc"] || [], "tintuc");
   });
 </script>
 
