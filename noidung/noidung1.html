@@ -6,6 +6,7 @@
   <title>Bẫy vay tiền qua App: Người dân phải biết bảo vệ mình</title>
   <link rel="stylesheet" href="../tailwind.min.css"> <!-- link tới tailwind nếu cần -->
 </head>
+<div id="header-placeholder"></div>
 <body class="bg-green-50 text-green-900 px-4 py-6">
   <div class="max-w-3xl mx-auto bg-white rounded-lg shadow p-6">
     <h1 class="text-2xl font-bold mb-4">Bẫy vay tiền qua App: Người dân phải biết bảo vệ mình</h1>
@@ -20,6 +21,48 @@
     Bạn viết tiếp nội dung chi tiết ở đây
     </p>
   </div>
+<div id="footer-placeholder"></div>
+<script>
+    // Nạp header
+    fetch('header.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('header-placeholder').innerHTML = html;
 
+        const menuVay = document.getElementById("menu-vay");
+        const menuThe = document.getElementById("menu-the");
+        const menuHuongDan = document.getElementById("menu-huongdan");
+        const menuTinTuc = document.getElementById("menu-tintuc");
+
+        const sections = {
+          vay: document.getElementById("vay-section"),
+          the: document.getElementById("the-section"),
+          huongdan: document.getElementById("huongdan-section"),
+          tintuc: document.getElementById("tintuc-section")
+        };
+
+        function setActive(menu) {
+          [menuVay, menuThe, menuHuongDan, menuTinTuc].forEach(m => m?.classList.remove("underline", "text-green-900"));
+          menu?.classList.add("underline", "text-green-900");
+        }
+
+        function showSection(key) {
+          Object.values(sections).forEach(sec => sec?.classList.add("hidden"));
+          sections[key]?.classList.remove("hidden");
+        }
+
+        menuVay.onclick = (e) => { e.preventDefault(); setActive(menuVay); showSection("vay"); };
+        menuThe.onclick = (e) => { e.preventDefault(); setActive(menuThe); showSection("the"); };
+        menuHuongDan.onclick = (e) => { e.preventDefault(); setActive(menuHuongDan); showSection("huongdan"); };
+        menuTinTuc.onclick = (e) => { e.preventDefault(); setActive(menuTinTuc); showSection("tintuc"); };
+      });
+
+    // Nạp footer
+    fetch('footer.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('footer-placeholder').innerHTML = html;
+      });
+  </script>
 </body>
 </html>
