@@ -323,7 +323,18 @@
     ]
   }
   </script>
-
+  <script>
+    function loadDetail(url) {
+      fetch(url)
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('content-detail').innerHTML = data;
+          document.getElementById('content-detail').classList.remove('hidden');
+          window.scrollTo(0, 0); // Cuộn lên đầu trang
+        })
+        .catch(error => console.error('Lỗi tải nội dung:', error));
+    }
+  </script>
 </head>
 <body class="bg-green-50">
  <header class="bg-white px-4 py-3 text-green-800 shadow-md fixed top-0 left-0 right-0 z-10">
@@ -384,7 +395,18 @@
   <div id="tintuc-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
     <!-- Các bài viết tin tức sẽ load vào đây -->
   </div>
+  <div id="content-detail" class="p-4 bg-white rounded-lg hidden"></div>
  </section>
+
+<!-- Thêm section cho nội dung chi tiết -->
+<section class="px-4 py-6 hidden" id="chitiet-section">
+  <div class="mb-4">
+    <button id="back-to-tintuc" class="px-4 py-2 bg-green-700 text-white rounded">Quay lại tin tức</button>
+  </div>
+  <div id="chitiet-container" class="bg-white p-4 rounded shadow">
+    <!-- Nội dung chi tiết sẽ được load vào đây -->
+  </div>
+</section>
 
   <section class="px-4 py-6 hidden" id="huongdan-section">
     <h2 class="text-xl font-bold text-center text-green-700 mb-4">MẸO HƯỚNG DẪN VAY TIỀN ONLINE NHANH VÀ MỞ THẺ TÍN DỤNG ONLINE MIỄN PHÍ</h2>
@@ -867,6 +889,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 <script>
+
   // Hàm preload files.json và load thẻ sản phẩm từ folder tương ứng
   async function loadCardsFromList(containerId, files, folder) {
     const container = document.getElementById(containerId);
@@ -882,15 +905,157 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 
-  // Khi trang tải xong, thực hiện preload và gọi 2 folder: vay, the
-  document.addEventListener("DOMContentLoaded", async () => {
-    const res = await fetch("sanpham/files.json");
-    const list = await res.json();
+ document.addEventListener("DOMContentLoaded", async () => {
+  const res = await fetch("sanpham/files.json");
+  const list = await res.json();
+  await loadCardsFromList("vay-container", list["vay"] || [], "vay");
+  await loadCardsFromList("the-container", list["the"] || [], "the");
+  await loadCardsFromList("tintuc-container", list["tintuc"] || [], "tintuc");
+  
+  // Thêm xử lý cho nút quay lại tin tức
+  if (document.getElementById('back-to-tintuc')) {
+    document.getElementById('back-to-tintuc').addEventListener('click', function() {
+      document.getElementById('chitiet-section').classList.add('hidden');
+      document.getElementById('tintuc-section').classList.remove('hidden');
+    });
+  }
+  
+  // Thêm xử lý cho các menu trong navbar
+  setupMenuHandlers();
+});
 
-    await loadCardsFromList("vay-container", list["vay"] || [], "vay");
-    await loadCardsFromList("the-container", list["the"] || [], "the");
-    await loadCardsFromList("tintuc-container", list["tintuc"] || [], "tintuc");
+// Thiết lập xử lý sự kiện cho các menu
+function setupMenuHandlers() {
+  // Lấy tất cả các menu item (giả sử chúng có class là 'menu-item' hoặc là các thẻ a trong navbar)
+  const menuItems = document.querySelectorAll('nav a, .menu-item');
+  
+  menuItems.forEach(item => {
+    item.addEventListener('click', function(event) {
+      // Kiểm tra xem menu được click có phải là menu Tin tức không
+      const isTinTucMenu = this.textContent.trim().toLowerCase().includes('tin tức');
+      
+      // Nếu đang hiển thị nội dung chi tiết và menu được click không phải là Tin tức
+      if (!isTinTucMenu && !document.getElementById('chitiet-section').classList.contains('hidden')) {
+        // Ẩn phần nội dung chi tiết trước khi chuyển sang menu khác
+        document.getElementById('chitiet-section').classList.add('hidden');
+        
+        // Hiển thị phần tương ứng với menu được click
+        // Đây là logic giả định, bạn cần điều chỉnh theo cấu trúc thực tế của trang web
+        const targetId = this.getAttribute('data-target') || this.getAttribute('href').replace('#', '');
+        if (targetId && document.getElementById(targetId)) {
+          document.getElementById(targetId).classList.remove('hidden');
+        }
+      }
+    });
   });
+}
+
+// Hàm loadCardsFromList đã được sửa đổi
+async function loadCardsFromList(containerId, fileList, type) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  for (const file of fileList) {
+    try {
+      const res = await fetch(`${type}/${file}`);
+      const html = await res.text();
+      
+      const tempDiv = document.createElement('div');
+      tempDiv.classList.add('bg-white', 'p-4', 'rounded', 'shadow', 'mb-4');
+      tempDiv.innerHTML = html;
+      
+      // Nếu đây là tin tức, thêm hành vi click cho tất cả thẻ a trong tin tức
+      if (type === "tintuc") {
+        // Lấy số tin tức từ tên file (ví dụ: tintuc1.html -> 1)
+        const tinTucId = file.replace(/[^0-9]/g, '');
+        
+        // Tìm tất cả các thẻ a trong tin tức và thêm sự kiện click
+        const allLinks = tempDiv.querySelectorAll('a');
+        allLinks.forEach(link => {
+          link.addEventListener('click', function(event) {
+            // Ngăn chặn hành vi mặc định (mở liên kết)
+            event.preventDefault();
+            
+            // Đảm bảo đang ở phần Tin tức
+            showTinTucSection();
+            
+            // Gọi hàm để tải nội dung chi tiết
+            loadNoiDungChiTiet(tinTucId);
+          });
+        });
+        
+        // Thêm hành vi click cho cả thẻ div tin tức
+        tempDiv.style.cursor = 'pointer'; // Đổi con trỏ thành hình bàn tay khi hover
+        tempDiv.addEventListener('click', function(event) {
+          // Chỉ xử lý click trực tiếp vào div, không phải vào các phần tử con
+          if (event.target === this) {
+            // Đảm bảo đang ở phần Tin tức
+            showTinTucSection();
+            
+            // Gọi hàm để tải nội dung chi tiết
+            loadNoiDungChiTiet(tinTucId);
+          }
+        });
+      }
+      
+      container.appendChild(tempDiv);
+    } catch (error) {
+      console.error(`Lỗi khi tải ${type}/${file}:`, error);
+    }
+  }
+}
+
+// Hàm hiển thị phần Tin tức và ẩn các phần khác
+function showTinTucSection() {
+  // Ẩn tất cả các section chính
+  const mainSections = document.querySelectorAll('section[id$="-section"]');
+  mainSections.forEach(section => {
+    section.classList.add('hidden');
+  });
+  
+  // Hiển thị phần Tin tức
+  document.getElementById('tintuc-section').classList.remove('hidden');
+}
+
+// Hàm để tải nội dung chi tiết
+async function loadNoiDungChiTiet(id) {
+  try {
+    const response = await fetch(`noidung/noidung${id}.html`);
+    const html = await response.text();
+    
+    // Hiển thị nội dung chi tiết
+    const chitietContainer = document.getElementById('chitiet-container');
+    chitietContainer.innerHTML = html;
+    
+    // Ẩn phần tin tức, hiện phần chi tiết
+    document.getElementById('tintuc-section').classList.add('hidden');
+    document.getElementById('chitiet-section').classList.remove('hidden');
+    
+    // Đánh dấu menu Tin tức là active
+    highlightTinTucMenu();
+    
+    // Cuộn lên đầu trang
+    window.scrollTo(0, 0);
+  } catch (error) {
+    console.error(`Lỗi khi tải nội dung chi tiết:`, error);
+  }
+}
+
+// Hàm để đánh dấu menu Tin tức là active
+function highlightTinTucMenu() {
+  // Loại bỏ trạng thái active của tất cả các menu
+  const menuItems = document.querySelectorAll('nav a, .menu-item');
+  menuItems.forEach(item => {
+    item.classList.remove('active', 'current-menu');
+  });
+  
+  // Tìm và đánh dấu menu Tin tức là active
+  menuItems.forEach(item => {
+    if (item.textContent.trim().toLowerCase().includes('tin tức')) {
+      item.classList.add('active', 'current-menu');
+    }
+  });
+}
 </script>
 
 

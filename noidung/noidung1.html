@@ -1,68 +1,70 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bẫy vay tiền qua App: Người dân phải biết bảo vệ mình</title>
-  <link rel="stylesheet" href="../tailwind.min.css"> <!-- link tới tailwind nếu cần -->
-</head>
-<div id="header-placeholder"></div>
-<body class="bg-green-50 text-green-900 px-4 py-6">
-  <div class="max-w-3xl mx-auto bg-white rounded-lg shadow p-6">
-    <h1 class="text-2xl font-bold mb-4">Bẫy vay tiền qua App: Người dân phải biết bảo vệ mình</h1>
-    <img src="../images/tintuc1.jpg" alt="Bẫy vay tiền" class="w-full h-64 object-cover rounded mb-4" loading="lazy">
-    <p class="text-sm text-gray-700 leading-relaxed mb-4">
-      Hiện nay, hình thức cho vay tiền qua app bùng nổ, nhưng kèm theo đó là vô số rủi ro tín dụng đen rình rập...
-    </p>
-    <p class="text-sm text-gray-700 leading-relaxed">
-      Người dân cần kiểm tra kỹ giấy phép, hợp đồng minh bạch trước khi vay. Tuyệt đối không vay app tự động gửi tiền vào tài khoản và đòi phí vô lý...
-    </p>
-    <p class="text-sm text-gray-700 leading-relaxed">
-    Bạn viết tiếp nội dung chi tiết ở đây
-    </p>
-  </div>
-<div id="footer-placeholder"></div>
-<script>
-    // Nạp header
-    fetch('header.html')
-      .then(res => res.text())
-      .then(html => {
-        document.getElementById('header-placeholder').innerHTML = html;
+  <meta charset="UTF-8" />
+  <meta name="description" content="Đăng ký vay tiền online nhanh 24/7 không cần gặp mặt, hỗ trợ toàn quốc. Lãi suất 0% khoản vay đầu tiên. Duyệt hồ sơ nhanh, thủ tục đơn giản.">
+  <meta name="theme-color" content="#22c55e">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow">
+  <title>Vay Tiền Online Nhanh - Không Thẩm Định | vay24h.pro.vn </title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
 
-        const menuVay = document.getElementById("menu-vay");
-        const menuThe = document.getElementById("menu-the");
-        const menuHuongDan = document.getElementById("menu-huongdan");
-        const menuTinTuc = document.getElementById("menu-tintuc");
 
-        const sections = {
-          vay: document.getElementById("vay-section"),
-          the: document.getElementById("the-section"),
-          huongdan: document.getElementById("huongdan-section"),
-          tintuc: document.getElementById("tintuc-section")
-        };
 
-        function setActive(menu) {
-          [menuVay, menuThe, menuHuongDan, menuTinTuc].forEach(m => m?.classList.remove("underline", "text-green-900"));
-          menu?.classList.add("underline", "text-green-900");
-        }
+  </style>
 
-        function showSection(key) {
-          Object.values(sections).forEach(sec => sec?.classList.add("hidden"));
-          sections[key]?.classList.remove("hidden");
-        }
-
-        menuVay.onclick = (e) => { e.preventDefault(); setActive(menuVay); showSection("vay"); };
-        menuThe.onclick = (e) => { e.preventDefault(); setActive(menuThe); showSection("the"); };
-        menuHuongDan.onclick = (e) => { e.preventDefault(); setActive(menuHuongDan); showSection("huongdan"); };
-        menuTinTuc.onclick = (e) => { e.preventDefault(); setActive(menuTinTuc); showSection("tintuc"); };
-      });
-
-    // Nạp footer
-    fetch('footer.html')
-      .then(res => res.text())
-      .then(html => {
-        document.getElementById('footer-placeholder').innerHTML = html;
-      });
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('nav-menu');
+      menu.classList.toggle('hidden');
+    }
   </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "vay24h.pro.vn",
+    "url": "https://vay24h.pro.vn",
+    "description": "Nền tảng hỗ trợ vay tiền và mở thẻ tín dụng online nhanh chóng tại Việt Nam.",
+    "sameAs": [
+      "https://facebook.com/taichinh8386",
+      "https://zalo.me/taichinh8386"
+    ]
+  }
+  </script>
+
+ <div id="header-placeholder" style="height: 80px;"></div>
+  
+  <!-- Nội dung chính của trang -->
+  <div id="main-content">
+    <div class="article-content mt-8">
+      <h1>Bẫy vay tiền qua App: Người dân phải biết bảo vệ mình</h1>
+      
+      <img src="/images/bayvay.jpg" alt="Bẫy vay tiền qua app" class="article-image">
+      
+      <p>Hiện nay, hình thức cho vay tiền qua app bùng nổ, nhưng kèm theo đó là vô số rủi ro tín dụng đen tinh ranh...</p>
+      
+      <h2>Những cạm bẫy thường gặp khi vay tiền qua app</h2>
+      <p>Người dân cần kiểm tra kỹ giấy phép, hợp đồng minh bạch trước khi vay. Tuyệt đối không vay app tự động gửi tiền vào tài khoản và đòi phí vô lý...</p>
+      
+      <h2>Các biện pháp bảo vệ bản thân</h2>
+      <ul>
+        <li>Chỉ vay từ các tổ chức tài chính được cấp phép bởi Ngân hàng Nhà nước</li>
+        <li>Đọc kỹ điều khoản hợp đồng trước khi ký</li>
+        <li>Không cung cấp thông tin cá nhân nhạy cảm qua các kênh không an toàn</li>
+        <li>Tìm hiểu kỹ lãi suất thực tế (bao gồm cả phí dịch vụ, phí quản lý)</li>
+        <li>Chú ý đến điều khoản phạt trả nợ trễ hạn</li>
+      </ul>
+      
+      <h2>Các công ty tài chính uy tín được cấp phép</h2>
+      <p>Nếu có nhu cầu vay tiền, người dân nên cân nhắc các tổ chức tài chính được cấp phép hoạt động chính thức. Một số công ty tài chính uy tín đã được cấp phép bởi Ngân hàng Nhà nước Việt Nam bao gồm: FE Credit, Home Credit, JACCS, Mirae Asset, SHB Finance, MB Shinsei, TPBank...</p>
+      
+      <h2>Kết luận</h2>
+      <p>Vay tiền qua app có thể là giải pháp tài chính linh hoạt trong trường hợp cần thiết, tuy nhiên người dân cần trang bị kiến thức đầy đủ để tránh rơi vào bẫy tín dụng đen trá hình. Hãy luôn nhớ: "Không có khoản vay nào thực sự dễ dàng và hoàn toàn không có điều kiện".</p>
+    </div>
+  </div>
+
 </body>
 </html>
