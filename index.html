@@ -9,6 +9,7 @@
   <title>Vay Tiền Online Nhanh - Không Thẩm Định | vay24h.pro.vn </title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <style>
+
   /* Tạo nhãn TOP #1 bằng ::before */
     .card-with-top-label::before {
       content: "TOP #1";
@@ -396,18 +397,25 @@
     <!-- Các bài viết tin tức sẽ load vào đây -->
   </div>
   <div id="content-detail" class="p-4 bg-white rounded-lg hidden"></div>
+
  </section>
 
 <!-- Thêm section cho nội dung chi tiết -->
 <section class="px-4 py-6 hidden" id="chitiet-section">
-  <div class="mb-4">
-    <button id="back-to-tintuc" class="px-4 py-2 bg-green-700 text-white rounded">Quay lại tin tức</button>
-  </div>
-  <div id="chitiet-container" class="bg-white p-4 rounded shadow">
+  <div id="chitiet-container">
     <!-- Nội dung chi tiết sẽ được load vào đây -->
   </div>
 </section>
 
+ <!-- Phần giới thiệu -->
+<section class="px-4 py-6 hidden" id="gioithieu-section">
+    <h2 class="text-xl font-bold text-center text-green-700 mb-4">GIỚI THIỆU VỀ VAY24H.PRO.VN</h2>
+     <div id="gioithieu-container">
+       <!-- Các bài viết tin tức sẽ load vào đây -->
+    </div>
+</section>
+
+ <!-- Phần hướng dẫn -->
   <section class="px-4 py-6 hidden" id="huongdan-section">
     <h2 class="text-xl font-bold text-center text-green-700 mb-4">MẸO HƯỚNG DẪN VAY TIỀN ONLINE NHANH VÀ MỞ THẺ TÍN DỤNG ONLINE MIỄN PHÍ</h2>
 
@@ -740,73 +748,121 @@ fetch('faq.html')
   .catch(error => console.error('Lỗi tải FAQ:', error));
 </script>
 
-  <script>
+ <script>
     const menuVay = document.getElementById("menu-vay");
     const menuThe = document.getElementById("menu-the");
     const menuHuongDan = document.getElementById("menu-huongdan");
     const menuTinTuc = document.getElementById("menu-tintuc");
+    const gotochitiet = document.getElementById("goto-chitiet");
     const vaySection = document.getElementById("vay-section");
     const theSection = document.getElementById("the-section");
     const huongDanSection = document.getElementById("huongdan-section");
     const tinTucSection = document.getElementById("tintuc-section");
-    const introSection = document.getElementById("intro-section"); // Thêm tham chiếu đến intro-section
-    const mainContent = document.getElementById("main-content"); // Thêm tham chiếu đến mốc cuộn
+    const chitietSection = document.getElementById("chitiet-section");
+    const introSection = document.getElementById("intro-section");
+    const mainContent = document.getElementById("main-content");
 
-    function setActive(menu) {
-      menuVay.classList.remove("text-green-900", "underline");
-      menuThe.classList.remove("text-green-900", "underline");
-      menuHuongDan.classList.remove("text-green-900", "underline");
-      menuTinTuc.classList.remove("text-green-900", "underline");
-      menu.classList.add("text-green-900", "underline");
+
+
+    // Hàm ẩn tất cả các section
+    function hideAllSections() {
+        vaySection.classList.add("hidden");
+        theSection.classList.add("hidden");
+        huongDanSection.classList.add("hidden");
+        tinTucSection.classList.add("hidden");
+        chitietSection.classList.add("hidden");
     }
 
+    // Hàm hiển thị section theo ID
+    function showSection(section) {
+        hideAllSections();
+        section.classList.remove("hidden");
+        mainContent.scrollIntoView({ behavior: "smooth" });
+    }
+
+    // Hàm thay đổi URL mà không tải lại trang
+    function changeURL(tabName) {
+        history.pushState({ tab: tabName }, "", `#${tabName}`);
+    }
+
+    // Xử lý nút Back/Forward trên trình duyệt
+    window.addEventListener("popstate", function (event) {
+        const tabName = event.state?.tab || "vay";
+        switchTab(tabName);  // Chuyển tab dựa vào state
+    });
+
+    // Hàm chuyển tab và thay đổi URL
+    function switchTab(tabName) {
+    setActive(document.getElementById(`menu-${tabName}`));
+    localStorage.setItem("selectedTab", tabName);
+
+    if (tabName === "vay") {
+        showSection(vaySection);
+        introSection.classList.add("hidden"); // Ẩn phần giới thiệu khi chọn Vay
+    } else if (tabName === "the") {
+        showSection(theSection);
+        introSection.classList.add("hidden"); // Ẩn phần giới thiệu khi chọn Thẻ
+    } else if (tabName === "huongdan") {
+        showSection(huongDanSection);
+        introSection.classList.remove("hidden"); // Hiển thị phần giới thiệu khi chọn Hướng dẫn
+    } else if (tabName === "tintuc") {
+        showSection(tinTucSection);
+        introSection.classList.add("hidden"); // Ẩn phần giới thiệu khi chọn Tin tức
+    } else if (tabName === "chitiet") {
+        showSection(chitietSection);
+        introSection.classList.add("hidden"); // Ẩn phần giới thiệu khi chọn chi tiết
+    } 
+}
+
+
+    // Hàm đổi trạng thái menu
+    function setActive(menu) {
+        menuVay.classList.remove("text-green-900", "underline");
+        menuThe.classList.remove("text-green-900", "underline");
+        menuHuongDan.classList.remove("text-green-900", "underline");
+        menuTinTuc.classList.remove("text-green-900", "underline");
+        menu.classList.add("text-green-900", "underline");
+    }
+
+    // Sự kiện khi nhấn vào các menu
     menuVay.addEventListener("click", (e) => {
-      e.preventDefault();
-      setActive(menuVay);
-      localStorage.setItem("selectedTab", "vay");
-      vaySection.classList.remove("hidden");
-      theSection.classList.add("hidden");
-      huongDanSection.classList.add("hidden");
-      tinTucSection.classList.add("hidden");
-      introSection.classList.add("hidden"); // Ẩn phần giới thiệu khi chọn Vay tiền
-      mainContent.scrollIntoView({ behavior: "smooth" }); // Cuộn đến mốc an toàn
+        e.preventDefault();
+        changeURL("vay");
+        switchTab("vay");
     });
 
     menuThe.addEventListener("click", (e) => {
-      e.preventDefault();
-      setActive(menuThe);
-      localStorage.setItem("selectedTab", "the");
-      vaySection.classList.add("hidden");
-      theSection.classList.remove("hidden");
-      huongDanSection.classList.add("hidden");
-      tinTucSection.classList.add("hidden");
-      introSection.classList.add("hidden"); // Ẩn phần giới thiệu khi chọn Thẻ tín dụng
-      mainContent.scrollIntoView({ behavior: "smooth" }); // Cuộn đến mốc an toàn
+        e.preventDefault();
+        changeURL("the");
+        switchTab("the");
     });
 
     menuHuongDan.addEventListener("click", (e) => {
-      e.preventDefault();
-      setActive(menuHuongDan);
-      localStorage.setItem("selectedTab", "huongdan");
-      vaySection.classList.add("hidden");
-      theSection.classList.add("hidden");
-      huongDanSection.classList.remove("hidden");
-      tinTucSection.classList.add("hidden");
-      introSection.classList.remove("hidden"); // Hiển thị phần giới thiệu khi chọn Hướng dẫn
-      mainContent.scrollIntoView({ behavior: "smooth" }); // Cuộn đến mốc an toàn
+        e.preventDefault();
+        changeURL("huongdan");
+        switchTab("huongdan");
     });
+
     menuTinTuc.addEventListener("click", (e) => {
-      e.preventDefault();
-      setActive(menuTinTuc);
-      localStorage.setItem("selectedTab", "tintuc");
-      vaySection.classList.add("hidden");
-      theSection.classList.add("hidden");
-      huongDanSection.classList.add("hidden");
-      tinTucSection.classList.remove("hidden");
-      introSection.classList.add("hidden");
-      mainContent.scrollIntoView({ behavior: "smooth" });
+        e.preventDefault();
+        changeURL("tintuc");
+        switchTab("tintuc");
     });
-    
+
+    // Khi tải lại trang, kiểm tra URL và hiển thị đúng section
+    document.addEventListener("DOMContentLoaded", function () {
+    const tabName = location.hash.replace("#", "") || "vay";
+    switchTab(tabName);
+
+    // Mặc định hiển thị intro-section khi tải trang
+    if (tabName === "vay" || tabName === "the" || tabName === "tintuc") {
+        introSection.classList.add("hidden");
+    } else {
+        introSection.classList.remove("hidden");
+    }
+});
+
+
    // Kiểm soát menu 
   // Thêm biến để theo dõi nếu đang tải lại trang
 let isPageRefresh = true;
@@ -911,6 +967,7 @@ document.addEventListener("DOMContentLoaded", function() {
   await loadCardsFromList("vay-container", list["vay"] || [], "vay");
   await loadCardsFromList("the-container", list["the"] || [], "the");
   await loadCardsFromList("tintuc-container", list["tintuc"] || [], "tintuc");
+  await loadCardsFromList("gioithieu-container", list["gioithieu"] || [], "gioithieu");
   
   // Thêm xử lý cho nút quay lại tin tức
   if (document.getElementById('back-to-tintuc')) {
@@ -1056,6 +1113,7 @@ function highlightTinTucMenu() {
     }
   });
 }
+
 </script>
 
 
@@ -1161,7 +1219,7 @@ function highlightTinTucMenu() {
     <div class="footer-column info-column">
       <h3><strong>Trang thông tin</strong> </h3>
       <ul>
-        <li><a href="#">Giới thiệu vay24h.pro.vn</a></li>
+        <li> <a href="#"onclick="document.getElementById('goto-gioithieu').click(); setTimeout(() => document.getElementById('main-content').scrollIntoView({ behavior: 'smooth' }), 300); return false;">Giới thiệu Vay24h.pro.vn</a></li>
         <li><a href="#">Điều khoản sử dụng</a></li>
         <li><a href="#">Chính sách bảo mật</a></li>
         <li><a href="#">Liên hệ với chúng tôi</a></li>

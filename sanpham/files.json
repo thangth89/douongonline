@@ -24,5 +24,13 @@
     "tintuc2.html",
     "tintuc3.html",
     "tintuc4.html"
+  ],
+ "baimoi": [
+    "baimoi1.html",
+    "baimoi2.html",
+    "baimoi3.html"
+  ],
+ "gioithieu": [
+    "gioithieu.html"
   ]
 }
