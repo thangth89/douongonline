@@ -302,14 +302,38 @@
   }
 }
 
+ .notification {
+    background-color: #fff8c4;
+    color: #000;
+    padding: 12px 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    animation: slideIn 0.5s ease, fadeOut 0.5s ease 9.5s forwards;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .notification img {
+  width: 50px;
+  height: 50px;
+  margin-right: 12px;
+  border-radius: 8px; /* hoặc 50% nếu muốn tròn */
+  }
+
+  @keyframes slideIn {
+    from {opacity: 0; transform: translateX(100%);}
+    to {opacity: 1; transform: translateX(0);}
+  }
+
+  @keyframes fadeOut {
+    to {opacity: 0; transform: translateX(100%);}
+  }
   </style>
 
-  <script>
-    function toggleMenu() {
-      const menu = document.getElementById('nav-menu');
-      menu.classList.toggle('hidden');
-    }
-  </script>
+
 
   <script type="application/ld+json">
   {
@@ -319,18 +343,6 @@
     "url": "https://vay24h.pro.vn",
     "description": "Nền tảng hỗ trợ vay tiền và mở thẻ tín dụng online nhanh chóng tại Việt Nam."
   }
-  </script>
-  <script>
-    function loadDetail(url) {
-      fetch(url)
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById('content-detail').innerHTML = data;
-          document.getElementById('content-detail').classList.remove('hidden');
-          window.scrollTo(0, 0); // Cuộn lên đầu trang
-        })
-        .catch(error => console.error('Lỗi tải nội dung:', error));
-    }
   </script>
 </head>
 <body class="bg-green-50">
@@ -726,16 +738,40 @@
 <!-- câu hỏi Q&A -->
 <div id="faq-placeholder"></div>
 
+
+<!-- Thông báo đăng ký thành công -->
+<div id="notification-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;"></div>
+
+<!-- Thêm thư viện CountUp.js từ CDN -->
+<script src="https://cdn.jsdelivr.net/npm/countup.js@2.0.8/dist/countUp.umd.js"></script>
+
 <script>
-fetch('faq.html')
+
+  function loadDetail(url) {
+      fetch(url)
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('content-detail').innerHTML = data;
+          document.getElementById('content-detail').classList.remove('hidden');
+          window.scrollTo(0, 0); // Cuộn lên đầu trang
+        })
+        .catch(error => console.error('Lỗi tải nội dung:', error));
+    }
+ 
+   function toggleMenu() {
+      const menu = document.getElementById('nav-menu');
+      menu.classList.toggle('hidden');
+    }
+
+  <!-- tải faq -->
+  fetch('faq.html')
   .then(response => response.text())
   .then(data => {
     document.getElementById('faq-placeholder').innerHTML = data;
   })
   .catch(error => console.error('Lỗi tải FAQ:', error));
-</script>
 
- <script>
+  <!-- xử lý menu -->
     const menuVay = document.getElementById("menu-vay");
     const menuThe = document.getElementById("menu-the");
     const menuHuongDan = document.getElementById("menu-huongdan");
@@ -900,13 +936,7 @@ document.addEventListener("DOMContentLoaded", function() {
   introSection.classList.remove("hidden");
    }
 });
- </script>
-
-<!-- Thêm thư viện CountUp.js từ CDN -->
-<script src="https://cdn.jsdelivr.net/npm/countup.js@2.0.8/dist/countUp.umd.js"></script>
-
 <!-- Script xử lý hiệu ứng đếm -->
-<script>
   document.addEventListener("DOMContentLoaded", function() {
     // Thêm mã này nếu bạn vẫn muốn hiệu ứng đếm số, nhưng đơn giản hơn
     document.querySelectorAll('.counter-value').forEach(function(counter) {
@@ -928,10 +958,61 @@ document.addEventListener("DOMContentLoaded", function() {
       updateCount();
     });
   });
-</script>
 
 
-<script>
+<!-- Script thông báo đăng ký -->
+
+  const tenKhach = ["Nguyễn Phi Hùng", "Trịnh Thị Lan", "Nguyễn Quốc Huy", "Phạm Thu Hằng", "Đào Công Phúc", "Bùi Bích Huệ"];
+  const soDienThoai = ["098*****12", "090*****45", "097*****89", "093*****33", "091*****77", "088*****66"];
+  const hinhAnh = [
+    "images/jeff.png",
+    "images/vayvnd.png",
+    "images/hsbc.png",
+    "images/meocat.png",
+    "images/cayvang.png"
+  ];
+
+  function hienThongBao() {
+    const container = document.getElementById('notification-container');
+    const ten = tenKhach[Math.floor(Math.random() * tenKhach.length)];
+    const sdt = soDienThoai[Math.floor(Math.random() * soDienThoai.length)];
+    const anh = hinhAnh[Math.floor(Math.random() * hinhAnh.length)];
+
+    const noti = document.createElement('div');
+    noti.className = 'notification';
+    noti.innerHTML = `
+  <img loading="lazy" src="${anh}" />
+  <span>${ten} - ${sdt} đã đăng ký thành công</span>
+`;
+
+    container.appendChild(noti);
+
+    setTimeout(() => {
+    noti.style.transition = 'opacity 0.5s';
+    noti.style.opacity = '0';
+    setTimeout(() => noti.remove(), 500); // xóa sau khi hiệu ứng xong
+    }, 10000);
+  }
+
+  // Hiển thị thông báo mỗi 1 phút
+  setInterval(hienThongBao, 60000);
+
+  // Hiển thị ngay thông báo đầu tiên khi vào trang
+  window.addEventListener('DOMContentLoaded', () => {
+  setTimeout(hienThongBao, 15000); // 15000 ms = 15 giây
+  });
+
+  function updatePlaceholderHeight() {
+    const header = document.querySelector('header');
+    const placeholder = document.getElementById('header-placeholder');
+    if (header && placeholder) {
+      const headerHeight = header.offsetHeight;
+      placeholder.style.height = (headerHeight + 16) + 'px'; // Header height + khoảng đệm 16px
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', updatePlaceholderHeight);
+  window.addEventListener('resize', updatePlaceholderHeight); // Khi thay đổi kích thước cửa sổ
 
   // Hàm preload files.json và load thẻ sản phẩm từ folder tương ứng
   async function loadCardsFromList(containerId, files, folder) {
@@ -1027,7 +1108,7 @@ async function loadCardsFromList(containerId, fileList, type) {
             loadNoiDungChiTiet(tinTucId);
           });
         });
-        
+   
         // Thêm hành vi click cho cả thẻ div tin tức
         tempDiv.style.cursor = 'pointer'; // Đổi con trỏ thành hình bàn tay khi hover
         tempDiv.addEventListener('click', function(event) {
@@ -1041,9 +1122,8 @@ async function loadCardsFromList(containerId, fileList, type) {
           }
         });
       }
-      
       container.appendChild(tempDiv);
-    } catch (error) {
+      } catch (error) {
       console.error(`Lỗi khi tải ${type}/${file}:`, error);
     }
   }
@@ -1100,100 +1180,6 @@ function highlightTinTucMenu() {
     }
   });
 }
-
-</script>
-
-
-<!-- Thông báo đăng ký thành công -->
-<div id="notification-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;"></div>
-
-<style>
-  .notification {
-    background-color: #fff8c4;
-    color: #000;
-    padding: 12px 20px;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    margin-top: 10px;
-    display: flex;
-    align-items: center;
-    animation: slideIn 0.5s ease, fadeOut 0.5s ease 9.5s forwards;
-    font-size: 14px;
-    font-weight: 500;
-  }
-
-  .notification img {
-  width: 50px;
-  height: 50px;
-  margin-right: 12px;
-  border-radius: 8px; /* hoặc 50% nếu muốn tròn */
-  }
-
-  @keyframes slideIn {
-    from {opacity: 0; transform: translateX(100%);}
-    to {opacity: 1; transform: translateX(0);}
-  }
-
-  @keyframes fadeOut {
-    to {opacity: 0; transform: translateX(100%);}
-  }
-</style>
-
-<script>
-  const tenKhach = ["Nguyễn Phi Hùng", "Trịnh Thị Lan", "Nguyễn Quốc Huy", "Phạm Thu Hằng", "Đào Công Phúc", "Bùi Bích Huệ"];
-  const soDienThoai = ["098*****12", "090*****45", "097*****89", "093*****33", "091*****77", "088*****66"];
-  const hinhAnh = [
-    "images/jeff.png",
-    "images/vayvnd.png",
-    "images/hsbc.png",
-    "images/meocat.png",
-    "images/cayvang.png"
-  ];
-
-  function hienThongBao() {
-    const container = document.getElementById('notification-container');
-    const ten = tenKhach[Math.floor(Math.random() * tenKhach.length)];
-    const sdt = soDienThoai[Math.floor(Math.random() * soDienThoai.length)];
-    const anh = hinhAnh[Math.floor(Math.random() * hinhAnh.length)];
-
-    const noti = document.createElement('div');
-    noti.className = 'notification';
-    noti.innerHTML = `
-  <img loading="lazy" src="${anh}" />
-  <span>${ten} - ${sdt} đã đăng ký thành công</span>
-`;
-
-    container.appendChild(noti);
-
-    setTimeout(() => {
-    noti.style.transition = 'opacity 0.5s';
-    noti.style.opacity = '0';
-    setTimeout(() => noti.remove(), 500); // xóa sau khi hiệu ứng xong
-    }, 10000);
-  }
-
-  // Hiển thị thông báo mỗi 1 phút
-  setInterval(hienThongBao, 60000);
-
-  // Hiển thị ngay thông báo đầu tiên khi vào trang
-  window.addEventListener('DOMContentLoaded', () => {
-  setTimeout(hienThongBao, 15000); // 15000 ms = 15 giây
-  });
-
-</script>
-
-<script>
-  function updatePlaceholderHeight() {
-    const header = document.querySelector('header');
-    const placeholder = document.getElementById('header-placeholder');
-    if (header && placeholder) {
-      const headerHeight = header.offsetHeight;
-      placeholder.style.height = (headerHeight + 16) + 'px'; // Header height + khoảng đệm 16px
-    }
-  }
-
-  document.addEventListener('DOMContentLoaded', updatePlaceholderHeight);
-  window.addEventListener('resize', updatePlaceholderHeight); // Khi thay đổi kích thước cửa sổ
 </script>
 
 
