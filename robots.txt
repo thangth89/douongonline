@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.vay24h.pro.vn/sitemap.xml
